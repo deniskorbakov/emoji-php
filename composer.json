@@ -1,7 +1,7 @@
 {
-    "name": "deniskorbakov/skeleton-php-docker",
-    "description": "A skeleton php libs with docker",
-    "keywords": ["php", "skeleton", "package", "docker"],
+    "name": "deniskorbakov/emoji-php",
+    "description": "Library for Emoji in PHP - replacement, search, transformation by CLDR",
+    "keywords": ["emoji", "php", "cldr"],
     "type": "libarary",
     "license": "MIT",
     "authors": [
@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "DenisKorbakov\\SkeletonPhpDocker\\": "src/"
+            "DenisKorbakov\\EmojiPhp\\": "src/"
         }
     },
     "autoload-dev": {
