@@ -39,7 +39,11 @@
     ],
     "phpstan": "phpstan analyse --memory-limit=2G",
     "rector": "rector",
-    "cs": "phpcs"
+    "cs": "phpcs",
+    "generate-standrt-emojis": [
+      "@php bin/generate-emojis.php ru",
+      "@php bin/generate-emojis.php en"
+    ]
   },
   "require-dev": {
     "pestphp/pest": "^3.8",
