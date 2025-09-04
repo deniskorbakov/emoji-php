@@ -9,5 +9,5 @@ interface Arguments
     /** @return array<string, mixed> */
     public function all(): array;
 
-    public function show(ArgumentKey $key): mixed;
+    public function show(mixed $key): mixed;
 }
