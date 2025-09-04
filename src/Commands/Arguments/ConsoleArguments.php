@@ -14,7 +14,7 @@ final class ConsoleArguments implements Arguments
 
     public function show(mixed $key): mixed
     {
-        return $this->arguments[$key->value];
+        return $this->arguments[$key];
     }
 
     public function all(): array
