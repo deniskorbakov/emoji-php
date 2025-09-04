@@ -4,12 +4,23 @@ declare(strict_types=1);
 
 namespace DenisKorbakov\EmojiPhp\Commands;
 
-use DenisKorbakov\EmojiPhp\Commands\Arguments\ArgumentKey;
 use DenisKorbakov\EmojiPhp\Commands\Arguments\Arguments;
+use DenisKorbakov\EmojiPhp\Commands\Outputs\ConsoleOutput;
+use DenisKorbakov\EmojiPhp\Files\EmojiFilePath;
+use DenisKorbakov\EmojiPhp\Files\File;
+use DenisKorbakov\EmojiPhp\Files\FileJson;
+use DenisKorbakov\EmojiPhp\Mappers\EmojiLocaleMapper;
 use Throwable;
 
 final readonly class EmojiGenerateCommand implements Command
 {
+    public const string ERROR_EMOJI_FILE_NOT_FOUND = 'emoji with current locale is not exists';
+    public const string ERROR_CLDR_FILE_NOT_FOUND = 'short code with current locale is not exists';
+
+    public const string SUCCESS_SAVE = 'is your locale emoji saved';
+
+    public const int LOCALE_KEY = 1;
+
     public function __construct(
         public Arguments $arguments,
     ) {
@@ -17,43 +28,39 @@ final readonly class EmojiGenerateCommand implements Command
 
     public function execute(): void
     {
-        $locale = $this->arguments->show(
-            ArgumentKey::LocaleKey
-        );
+        $locale = $this->arguments->show(self::LOCALE_KEY);
 
         try {
-            $emojiFilepath = "vendor/milesj/emojibase/packages/data/$locale/compact.raw.json";
-            $cldrCodeFilePath = "vendor/milesj/emojibase/packages/data/en/shortcodes/cldr.raw.json";
+            $emojiFile = new File(
+                new EmojiFilePath($locale)->emoji()
+            );
 
-            if (! file_exists($emojiFilepath)) {
-                echo "Error: emoji with current locale is not exists\n";
-                exit(1);
+            $cldrCodeFile = new File(
+                new EmojiFilePath($locale)->cldr()
+            );
+
+            if (! $emojiFile->exists()) {
+                new ConsoleOutput(self::ERROR_EMOJI_FILE_NOT_FOUND)->error();
             }
 
-            if (! file_exists($cldrCodeFilePath)) {
-                echo "Error: short code with current locale is not exists\n";
-                exit(1);
+            if (! $cldrCodeFile->exists()) {
+                new ConsoleOutput(self::ERROR_CLDR_FILE_NOT_FOUND)->error();
             }
 
-            $emojiFileData = file_get_contents($emojiFilepath, true);
-            $cldrFileData = file_get_contents($cldrCodeFilePath, true);
+            $emojiWithCldrCodes = new EmojiLocaleMapper(
+                new FileJson($emojiFile),
+                new FileJson($cldrCodeFile)
+            )->mapCldr();
 
-            $emojis = json_decode($emojiFileData, true);
-            $cldrCodes = json_decode($cldrFileData, true);
+            new FileJson(
+                new File(
+                    new EmojiFilePath($locale)->emojiLocale()
+                )
+            )->write($emojiWithCldrCodes);
 
-            foreach ($emojis as &$emoji) {
-                $hexCodeKey = $emoji['hexcode'];
-
-                $emoji['code'] = $cldrCodes[$hexCodeKey] ?? null;
-
-                unset($emoji['hexcode']);
-            }
-            unset($emoji);
-
-            file_put_contents("emojis/{$locale}.json", json_encode($emojis, JSON_PRETTY_PRINT));
+            new ConsoleOutput(self::SUCCESS_SAVE)->success();
         } catch (Throwable $exception) {
-            echo "Error: {$exception->getMessage()}\n";
-            exit(1);
+            new ConsoleOutput($exception->getMessage())->error();
         }
     }
 }
