@@ -12,7 +12,7 @@ final class ConsoleArguments implements Arguments
     ) {
     }
 
-    public function show(ArgumentKey $key): mixed
+    public function show(mixed $key): mixed
     {
         return $this->arguments[$key->value];
     }
