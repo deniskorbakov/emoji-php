@@ -1,54 +1,76 @@
 {
-    "name": "deniskorbakov/skeleton-php-docker",
-    "description": "A skeleton php libs with docker",
-    "keywords": ["php", "skeleton", "package", "docker"],
-    "type": "libarary",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Denis Korbakov",
-            "email": "korbakovd@gmail.com"
-        }
-    ],
-    "require": {
-        "php": ">=8.2"
-    },
-    "autoload": {
-        "psr-4": {
-            "DenisKorbakov\\SkeletonPhpDocker\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
-    "minimum-stability": "stable",
-    "scripts": {
-        "tests": "pest --stop-on-failure --colors",
-        "tests-coverage": "pest --coverage --min=90",
-        "tests-mutation": "pest --mutate",
-        "lint": [
-            "@phpstan",
-            "@cs",
-            "@rector"
-        ],
-        "phpstan": "phpstan analyse --memory-limit=2G",
-        "rector": "rector",
-        "cs": "phpcs"
-    },
-    "require-dev": {
-        "pestphp/pest": "^3.8",
-        "phpstan/phpstan": "^2.1",
-        "rector/rector": "*",
-        "squizlabs/php_codesniffer": "^3.13",
-        "slevomat/coding-standard": "^8.20",
-        "orchestra/testbench": "^10.4"
-    },
-    "config": {
-        "allow-plugins": {
-            "pestphp/pest-plugin": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
-        }
+  "name": "deniskorbakov/emoji-php",
+  "description": "Library for Emoji in PHP - replacement, search, transformation by CLDR",
+  "keywords": [
+    "emoji",
+    "php",
+    "cldr"
+  ],
+  "type": "libarary",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Denis Korbakov",
+      "email": "korbakovd@gmail.com"
     }
+  ],
+  "require": {
+    "php": ">=8.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "DenisKorbakov\\EmojiPhp\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "stable",
+  "scripts": {
+    "tests": "pest --stop-on-failure --colors",
+    "tests-coverage": "pest --coverage --min=90",
+    "tests-mutation": "pest --mutate",
+    "lint": [
+      "@phpstan",
+      "@cs",
+      "@rector"
+    ],
+    "phpstan": "phpstan analyse --memory-limit=2G",
+    "rector": "rector",
+    "cs": "phpcs",
+    "generate-standrt-emojis": [
+      "@php bin/generate-emojis.php ru",
+      "@php bin/generate-emojis.php en"
+    ]
+  },
+  "require-dev": {
+    "pestphp/pest": "^3.8",
+    "phpstan/phpstan": "^2.1",
+    "rector/rector": "*",
+    "squizlabs/php_codesniffer": "^3.13",
+    "slevomat/coding-standard": "^8.20",
+    "orchestra/testbench": "^10.4",
+    "milesj/emojibase": "^16.0"
+  },
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "milesj/emojibase",
+        "version": "16.0.3",
+        "dist": {
+          "url": "https://github.com/milesj/emojibase/archive/refs/tags/emojibase-data@16.0.3.zip",
+          "type": "zip"
+        }
+      }
+    }
+  ],
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
 }
