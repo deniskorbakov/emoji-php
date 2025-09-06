@@ -4,29 +4,22 @@ declare(strict_types=1);
 
 namespace DenisKorbakov\EmojiPhp\Parsers;
 
-use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
-use DenisKorbakov\EmojiPhp\Files\FileJson;
-
 final class EmojiListParser implements Parser
 {
 	public const string SEPARATOR = ':';
 
+	/** @param array<int, array<string, mixed>> $emojisLocale */
 	public function __construct(
-		public FileJson $emojisLocale,
+		public array $emojisLocale,
 	) {
 	}
 
-	/**
-	 * @return array<string, string>
-	 * @throws FileNotFoundException
-	 */
+	/** @return array<string, string> */
 	public function parse(): array
 	{
 		$emojisList = [];
 
-		$emojis = $this->emojisLocale->read();
-
-		foreach ($emojis as $emoji) {
+		foreach ($this->emojisLocale as $emoji) {
 			$emojiUnicode = $emoji['unicode'];
 			$cldrCode = self::SEPARATOR . $emoji['code'] . self::SEPARATOR;
 
