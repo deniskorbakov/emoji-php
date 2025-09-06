@@ -9,6 +9,7 @@ use DenisKorbakov\EmojiPhp\Commands\Outputs\ConsoleOutput;
 use DenisKorbakov\EmojiPhp\Files\EmojiFilePath;
 use DenisKorbakov\EmojiPhp\Files\File;
 use DenisKorbakov\EmojiPhp\Files\FileJson;
+use DenisKorbakov\EmojiPhp\Locale;
 use DenisKorbakov\EmojiPhp\Mappers\EmojiLocaleMapper;
 use DenisKorbakov\EmojiPhp\Parsers\EmojiListParser;
 use DenisKorbakov\EmojiPhp\Transformers\EmojiListTransformer;
@@ -17,6 +18,8 @@ use Throwable;
 final readonly class EmojiGenerateCommand implements Command
 {
 	public const string SUCCESS_SAVE = 'is your locale emoji saved';
+
+	public const string ERROR_LOCALE = 'locale is not found';
 
 	public const int LOCALE_KEY = 1;
 
@@ -27,9 +30,15 @@ final readonly class EmojiGenerateCommand implements Command
 
 	public function execute(): void
 	{
-		try {
-			$locale = $this->arguments->show(self::LOCALE_KEY);
+		$locale = Locale::tryFrom(
+			$this->arguments->show(self::LOCALE_KEY)
+		);
 
+		if (null === $locale) {
+			new ConsoleOutput(self::ERROR_LOCALE)->error();
+		}
+
+		try {
 			$emojisCldrCombined = new EmojiLocaleMapper(
 				new FileJson(
 					new File(
