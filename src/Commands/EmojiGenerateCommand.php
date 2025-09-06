@@ -10,57 +10,64 @@ use DenisKorbakov\EmojiPhp\Files\EmojiFilePath;
 use DenisKorbakov\EmojiPhp\Files\File;
 use DenisKorbakov\EmojiPhp\Files\FileJson;
 use DenisKorbakov\EmojiPhp\Mappers\EmojiLocaleMapper;
+use DenisKorbakov\EmojiPhp\Parsers\EmojiListParser;
+use DenisKorbakov\EmojiPhp\Transformers\EmojiListTransformer;
 use Throwable;
 
 final readonly class EmojiGenerateCommand implements Command
 {
-    public const string ERROR_EMOJI_FILE_NOT_FOUND = 'emoji with current locale is not exists';
-    public const string ERROR_CLDR_FILE_NOT_FOUND = 'short code with current locale is not exists';
+	public const string SUCCESS_SAVE = 'is your locale emoji saved';
 
-    public const string SUCCESS_SAVE = 'is your locale emoji saved';
+	public const int LOCALE_KEY = 1;
 
-    public const int LOCALE_KEY = 1;
+	public function __construct(
+		public Arguments $arguments,
+	) {
+	}
 
-    public function __construct(
-        public Arguments $arguments,
-    ) {
-    }
+	public function execute(): void
+	{
+		$locale = $this->arguments->show(self::LOCALE_KEY);
 
-    public function execute(): void
-    {
-        $locale = $this->arguments->show(self::LOCALE_KEY);
+		$emojisLocaleFile = new FileJson(
+			new File(
+				new EmojiFilePath($locale)->emoji()
+			)
+		);
 
-        try {
-            $emojiFile = new File(
-                new EmojiFilePath($locale)->emoji()
-            );
+		$cldrLocaleFile = new FileJson(
+			new File(
+				new EmojiFilePath($locale)->cldr()
+			)
+		);
 
-            $cldrCodeFile = new File(
-                new EmojiFilePath($locale)->cldr()
-            );
+		$emojisWithCldrFile = new FileJson(
+			new File(
+				new EmojiFilePath($locale)->emojiLocale()
+			)
+		);
 
-            if (! $emojiFile->exists()) {
-                new ConsoleOutput(self::ERROR_EMOJI_FILE_NOT_FOUND)->error();
-            }
+		$emojisListFile = new File(
+			new EmojiFilePath($locale)->list()
+		);
 
-            if (! $cldrCodeFile->exists()) {
-                new ConsoleOutput(self::ERROR_CLDR_FILE_NOT_FOUND)->error();
-            }
+		try {
+			$emojisWithCldrFile->write(
+				new EmojiLocaleMapper(
+					$emojisLocaleFile,
+					$cldrLocaleFile
+				)->combine()
+			);
 
-            $emojiWithCldrCodes = new EmojiLocaleMapper(
-                new FileJson($emojiFile),
-                new FileJson($cldrCodeFile)
-            )->mapCldr();
+			$emojisListFile->write(
+				new EmojiListTransformer(
+					new EmojiListParser($emojisWithCldrFile)->parse()
+				)->transform()
+			);
 
-            new FileJson(
-                new File(
-                    new EmojiFilePath($locale)->emojiLocale()
-                )
-            )->write($emojiWithCldrCodes);
-
-            new ConsoleOutput(self::SUCCESS_SAVE)->success();
-        } catch (Throwable $exception) {
-            new ConsoleOutput($exception->getMessage())->error();
-        }
-    }
+			new ConsoleOutput(self::SUCCESS_SAVE)->success();
+		} catch (Throwable $exception) {
+			new ConsoleOutput($exception->getMessage())->error();
+		}
+	}
 }

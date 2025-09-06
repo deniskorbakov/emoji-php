@@ -8,8 +8,6 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use DenisKorbakov\EmojiPhp\Commands\Arguments\ConsoleArguments;
 use DenisKorbakov\EmojiPhp\Commands\EmojiGenerateCommand;
 
-$command = new EmojiGenerateCommand(
+new EmojiGenerateCommand(
     new ConsoleArguments($argv)
-);
-
-$command->execute();
+)->execute();

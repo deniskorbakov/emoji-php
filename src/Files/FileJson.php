@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace DenisKorbakov\EmojiPhp\Files;
 
+use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
+
 final readonly class FileJson
 {
     public function __construct(
@@ -11,11 +13,17 @@ final readonly class FileJson
     ) {
     }
 
+    /**
+     * @throws FileNotFoundException
+     */
     public function read(): array
     {
         return json_decode($this->file->read(), true);
     }
 
+    /**
+     * @throws FileNotFoundException
+     */
     public function write(array $data): void
     {
         $this->file->write(
