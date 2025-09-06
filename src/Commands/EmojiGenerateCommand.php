@@ -30,15 +30,15 @@ final readonly class EmojiGenerateCommand implements Command
 
 	public function execute(): void
 	{
-		$locale = Locale::tryFrom(
-			$this->arguments->show(self::LOCALE_KEY)
-		);
-
-		if (null === $locale) {
-			new ConsoleOutput(self::ERROR_LOCALE)->error();
-		}
-
 		try {
+			$localeArg = $this->arguments->show(self::LOCALE_KEY);
+
+			$locale = Locale::tryFrom($localeArg);
+
+			if (null === $locale) {
+				new ConsoleOutput(self::ERROR_LOCALE)->error();
+			}
+
 			$emojisCldrCombined = new EmojiLocaleMapper(
 				new FileJson(
 					new File(
