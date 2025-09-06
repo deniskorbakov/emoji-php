@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace DenisKorbakov\EmojiPhp\Mappers;
 
+use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
 use DenisKorbakov\EmojiPhp\Files\FileJson;
 
-final class EmojiLocaleMapper
+final class EmojiLocaleMapper implements Mapper
 {
     public function __construct(
         public FileJson $sourceFile,
@@ -14,7 +15,10 @@ final class EmojiLocaleMapper
     ) {
     }
 
-    public function mapCldr(): array
+	/**
+	 * @throws FileNotFoundException
+	 */
+	public function combine(): array
     {
         $emojis = $this->sourceFile->read();
         $cldrCodes = $this->targetFile->read();
