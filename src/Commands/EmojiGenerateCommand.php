@@ -10,6 +10,8 @@ use DenisKorbakov\EmojiPhp\Files\EmojiFilePath;
 use DenisKorbakov\EmojiPhp\Files\File;
 use DenisKorbakov\EmojiPhp\Files\FileJson;
 use DenisKorbakov\EmojiPhp\Mappers\EmojiLocaleMapper;
+use DenisKorbakov\EmojiPhp\Parsers\EmojiListParser;
+use DenisKorbakov\EmojiPhp\Transformers\EmojiListTransformer;
 use Throwable;
 
 final readonly class EmojiGenerateCommand implements Command
@@ -27,25 +29,41 @@ final readonly class EmojiGenerateCommand implements Command
 	{
 		$locale = $this->arguments->show(self::LOCALE_KEY);
 
-		try {
-			$emojiFile = new File(
+		$emojisLocaleFile = new FileJson(
+			new File(
 				new EmojiFilePath($locale)->emoji()
-			);
+			)
+		);
 
-			$cldrCodeFile = new File(
+		$cldrLocaleFile = new FileJson(
+			new File(
 				new EmojiFilePath($locale)->cldr()
+			)
+		);
+
+		$emojisWithCldrFile = new FileJson(
+			new File(
+				new EmojiFilePath($locale)->emojiLocale()
+			)
+		);
+
+		$emojisListFile = new File(
+			new EmojiFilePath($locale)->list()
+		);
+
+		try {
+			$emojisWithCldrFile->write(
+				new EmojiLocaleMapper(
+					$emojisLocaleFile,
+					$cldrLocaleFile
+				)->combine()
 			);
 
-			$emojiWithCldrCodes = new EmojiLocaleMapper(
-				new FileJson($emojiFile),
-				new FileJson($cldrCodeFile)
-			)->mapCldr();
-
-			new FileJson(
-				new File(
-					new EmojiFilePath($locale)->emojiLocale()
-				)
-			)->write($emojiWithCldrCodes);
+			$emojisListFile->write(
+				new EmojiListTransformer(
+					new EmojiListParser($emojisWithCldrFile)->parse()
+				)->transform()
+			);
 
 			new ConsoleOutput(self::SUCCESS_SAVE)->success();
 		} catch (Throwable $exception) {
