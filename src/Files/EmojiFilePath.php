@@ -16,8 +16,7 @@ final readonly class EmojiFilePath
 	public const string EMOJI_LOCALE_DIR = 'emojis/';
 	public const string EMOJI_LOCALE_EXTENSION = '.json';
 
-	public const string EMOJI_LIST_DIR = 'lists/';
-	public const string EMOJI_LIST_EXTENSION = '.php';
+	public const string EMOJI_LIST_FILENAME = 'list.php';
 
 
 	public function __construct(
@@ -42,7 +41,6 @@ final readonly class EmojiFilePath
 
 	public function list(): string
 	{
-		return self::EMOJI_LOCALE_DIR . self::EMOJI_LIST_DIR .
-			$this->locale->value . self::EMOJI_LIST_EXTENSION;
+		return self::EMOJI_LOCALE_DIR . self::EMOJI_LIST_FILENAME;
 	}
 }
