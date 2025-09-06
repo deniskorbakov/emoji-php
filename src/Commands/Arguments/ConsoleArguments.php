@@ -4,21 +4,30 @@ declare(strict_types=1);
 
 namespace DenisKorbakov\EmojiPhp\Commands\Arguments;
 
+use DenisKorbakov\EmojiPhp\Commands\Arguments\Exceptions\EmptyArgument;
+
 final class ConsoleArguments implements Arguments
 {
-    /** @param array<string, mixed> $arguments */
-    public function __construct(
-        public array $arguments,
-    ) {
-    }
+	/** @param array<int, string> $arguments */
+	public function __construct(
+		public array $arguments,
+	) {
+	}
 
-    public function show(mixed $key): mixed
-    {
-        return $this->arguments[$key];
-    }
+	/**
+	 * @throws EmptyArgument
+	 */
+	public function show(int $key): string
+	{
+		if (!array_key_exists($key, $this->arguments)) {
+			throw new EmptyArgument();
+		}
 
-    public function all(): array
-    {
-        return $this->arguments;
-    }
+		return $this->arguments[$key];
+	}
+
+	public function all(): array
+	{
+		return $this->arguments;
+	}
 }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace DenisKorbakov\EmojiPhp\Files;
 
+use DenisKorbakov\EmojiPhp\Locale;
+
 final readonly class EmojiFilePath
 {
 	public const string EMOJIS_DATA_BASE_PATH = 'vendor/milesj/emojibase/packages/data/';
@@ -14,18 +16,17 @@ final readonly class EmojiFilePath
 	public const string EMOJI_LOCALE_DIR = 'emojis/';
 	public const string EMOJI_LOCALE_EXTENSION = '.json';
 
-	public const string EMOJI_LIST_DIR = 'lists/';
-	public const string EMOJI_LIST_EXTENSION = '.php';
+	public const string EMOJI_LIST_FILENAME = 'list.php';
 
 
 	public function __construct(
-		public string $locale,
+		public Locale $locale,
 	) {
 	}
 
 	public function emoji(): string
 	{
-		return self::EMOJIS_DATA_BASE_PATH . $this->locale . self::EMOJI_FILE_NAME;
+		return self::EMOJIS_DATA_BASE_PATH . $this->locale->value . self::EMOJI_FILE_NAME;
 	}
 
 	public function cldr(): string
@@ -35,12 +36,11 @@ final readonly class EmojiFilePath
 
 	public function emojiLocale(): string
 	{
-		return self::EMOJI_LOCALE_DIR . $this->locale . self::EMOJI_LOCALE_EXTENSION;
+		return self::EMOJI_LOCALE_DIR . $this->locale->value . self::EMOJI_LOCALE_EXTENSION;
 	}
 
 	public function list(): string
 	{
-		return self::EMOJI_LOCALE_DIR . self::EMOJI_LIST_DIR .
-			$this->locale . self::EMOJI_LIST_EXTENSION;
+		return self::EMOJI_LOCALE_DIR . self::EMOJI_LIST_FILENAME;
 	}
 }

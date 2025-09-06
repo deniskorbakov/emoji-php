@@ -9,6 +9,7 @@ use DenisKorbakov\EmojiPhp\Commands\Outputs\ConsoleOutput;
 use DenisKorbakov\EmojiPhp\Files\EmojiFilePath;
 use DenisKorbakov\EmojiPhp\Files\File;
 use DenisKorbakov\EmojiPhp\Files\FileJson;
+use DenisKorbakov\EmojiPhp\Locale;
 use DenisKorbakov\EmojiPhp\Mappers\EmojiLocaleMapper;
 use DenisKorbakov\EmojiPhp\Parsers\EmojiListParser;
 use DenisKorbakov\EmojiPhp\Transformers\EmojiListTransformer;
@@ -17,6 +18,8 @@ use Throwable;
 final readonly class EmojiGenerateCommand implements Command
 {
 	public const string SUCCESS_SAVE = 'is your locale emoji saved';
+
+	public const string ERROR_LOCALE = 'locale is not found';
 
 	public const int LOCALE_KEY = 1;
 
@@ -27,41 +30,39 @@ final readonly class EmojiGenerateCommand implements Command
 
 	public function execute(): void
 	{
-		$locale = $this->arguments->show(self::LOCALE_KEY);
-
-		$emojisLocaleFile = new FileJson(
-			new File(
-				new EmojiFilePath($locale)->emoji()
-			)
-		);
-
-		$cldrLocaleFile = new FileJson(
-			new File(
-				new EmojiFilePath($locale)->cldr()
-			)
-		);
-
-		$emojisWithCldrFile = new FileJson(
-			new File(
-				new EmojiFilePath($locale)->emojiLocale()
-			)
-		);
-
-		$emojisListFile = new File(
-			new EmojiFilePath($locale)->list()
-		);
-
 		try {
-			$emojisWithCldrFile->write(
-				new EmojiLocaleMapper(
-					$emojisLocaleFile,
-					$cldrLocaleFile
-				)->combine()
-			);
+			$localeArg = $this->arguments->show(self::LOCALE_KEY);
 
-			$emojisListFile->write(
+			$locale = Locale::tryFrom($localeArg);
+
+			if (null === $locale) {
+				new ConsoleOutput(self::ERROR_LOCALE)->error();
+			}
+
+			$emojisCldrCombined = new EmojiLocaleMapper(
+				new FileJson(
+					new File(
+						new EmojiFilePath($locale)->emoji()
+					)
+				),
+				new FileJson(
+					new File(
+						new EmojiFilePath($locale)->cldr()
+					)
+				)
+			)->combine();
+
+			new FileJson(
+				new File(
+					new EmojiFilePath($locale)->emojiLocale()
+				)
+			)->write($emojisCldrCombined);
+
+			new File(
+				new EmojiFilePath($locale)->list()
+			)->write(
 				new EmojiListTransformer(
-					new EmojiListParser($emojisWithCldrFile)->parse()
+					new EmojiListParser($emojisCldrCombined)->parse()
 				)->transform()
 			);
 

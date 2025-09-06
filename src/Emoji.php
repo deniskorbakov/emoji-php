@@ -7,7 +7,7 @@ namespace DenisKorbakov\EmojiPhp;
 final class Emoji
 {
     public function __construct(
-        public string $locale,
+        public Locale $locale,
     ) {
     }
 
