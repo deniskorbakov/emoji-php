@@ -46,4 +46,16 @@ final readonly class File
     {
         file_put_contents($this->filename, '');
     }
+
+    /**
+     * @throws FileNotFoundException
+     */
+    public function execute(): mixed
+    {
+        if (! file_exists($this->filename)) {
+            throw new FileNotFoundException($this->filename);
+        }
+
+        return include $this->filename;
+    }
 }

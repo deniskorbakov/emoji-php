@@ -13,10 +13,11 @@ final readonly class EmojiFilePath
 	public const string EMOJI_FILE_NAME = '/compact.raw.json';
 	public const string CLDR_CODE_FILE_NAME = 'en/shortcodes/cldr.raw.json';
 
-	public const string EMOJI_LOCALE_DIR = 'emojis/';
+	public const string EMOJI_LOCALE_DIR = 'emojis/locale/';
+
 	public const string EMOJI_LOCALE_EXTENSION = '.json';
 
-	public const string EMOJI_LIST_FILENAME = 'list.php';
+	public const string EMOJI_LIST_FILENAME = 'emojis/list.php';
 
 
 	public function __construct(
@@ -41,6 +42,6 @@ final readonly class EmojiFilePath
 
 	public function list(): string
 	{
-		return self::EMOJI_LOCALE_DIR . self::EMOJI_LIST_FILENAME;
+		return self::EMOJI_LIST_FILENAME;
 	}
 }
