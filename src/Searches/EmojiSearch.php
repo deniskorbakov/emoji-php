@@ -30,44 +30,63 @@ final class EmojiSearch implements Search
             return [];
         }
 
-        $results = [];
+        $searchedEmojis = [];
 
         foreach ($emojis as $emoji) {
-            if (! array_key_exists('label', $emoji)) {
+            $emojiByLabel = $this->searchByLabel($emoji, $searchText);
+
+            if (!empty($emojiByLabel)) {
+                $searchedEmojis[] = $emojiByLabel;
                 continue;
             }
 
-            $label = $emoji['label'];
+            $emojiByTags = $this->searchByTags($emoji, $searchText);
 
-            if (! isset($label)) {
-                continue;
-            }
-
-            if (false !== stripos($label, $searchText)) {
-                $results[] = $emoji;
-                continue;
-            }
-
-            if (! array_key_exists('tags', $emoji)) {
-                continue;
-            }
-
-            $tags = $emoji['tags'];
-
-            if (! isset($tags) || ! is_array($tags)) {
-                continue;
-            }
-
-            foreach ($tags as $tag) {
-                if (false !== stripos($tag, $searchText)) {
-                    $results[] = $emoji;
-                    break;
-                }
+            if (!empty($emojiByTags)) {
+                $searchedEmojis[] = $emojiByTags;
             }
         }
 
         return new EmojiListParser(
-            $results,
+            $searchedEmojis,
         )->parse();
+    }
+
+    public function searchByLabel(array $emoji, string $searchText): array
+    {
+        if (! array_key_exists('label', $emoji)) {
+            return [];
+        }
+
+        $label = $emoji['label'];
+
+        if (! isset($label)) {
+            return [];
+        }
+
+        if (false === stripos($label, $searchText)) {
+            return [];
+        }
+
+        return $emoji;
+    }
+
+    public function searchByTags(array $emoji, string $searchText): array
+    {
+        if (! array_key_exists('tags', $emoji)) {
+            return [];
+        }
+
+        $tags = $emoji['tags'];
+
+        if (! isset($tags) || ! is_array($tags)) {
+            return [];
+        }
+
+        if (array_any($tags, fn($tag) => false !== stripos($tag, $searchText))) {
+            return $emoji;
+        }
+
+        return [];
     }
 }
