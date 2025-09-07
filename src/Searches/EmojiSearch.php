@@ -35,14 +35,14 @@ final class EmojiSearch implements Search
         foreach ($emojis as $emoji) {
             $emojiByLabel = $this->searchByLabel($emoji, $searchText);
 
-            if (!empty($emojiByLabel)) {
+            if (! empty($emojiByLabel)) {
                 $searchedEmojis[] = $emojiByLabel;
                 continue;
             }
 
             $emojiByTags = $this->searchByTags($emoji, $searchText);
 
-            if (!empty($emojiByTags)) {
+            if (! empty($emojiByTags)) {
                 $searchedEmojis[] = $emojiByTags;
             }
         }
