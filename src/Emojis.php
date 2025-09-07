@@ -20,7 +20,7 @@ final class Emojis
     /**
      * @throws FileNotFoundException
      */
-    public function codeToEmojis(string $text): string
+    public function toEmoji(string $text): string
     {
         $emojiFile = new File(
             new EmojiFilePath($this->locale)->list()
@@ -32,7 +32,7 @@ final class Emojis
     /**
      * @throws FileNotFoundException
      */
-    public function emojisToCode(string $text): string
+    public function toCode(string $text): string
     {
         $emojiFile = new File(
             new EmojiFilePath($this->locale)->list()
