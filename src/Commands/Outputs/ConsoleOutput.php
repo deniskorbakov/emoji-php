@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DenisKorbakov\EmojiPhp\Commands\Outputs;
 
-final class ConsoleOutput implements Output
+final readonly class ConsoleOutput implements Output
 {
     public const string ERROR_PREFIX = 'Error: ';
     public const string SUCCESS_PREFIX = 'Success: ';

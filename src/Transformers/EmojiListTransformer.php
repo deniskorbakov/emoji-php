@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DenisKorbakov\EmojiPhp\Transformers;
 
-final class EmojiListTransformer implements Transformer
+final readonly class EmojiListTransformer implements Transformer
 {
 	/** @param array<string, string> $emojisList */
 	public function __construct(

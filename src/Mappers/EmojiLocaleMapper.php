@@ -7,7 +7,7 @@ namespace DenisKorbakov\EmojiPhp\Mappers;
 use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
 use DenisKorbakov\EmojiPhp\Files\FileJson;
 
-final class EmojiLocaleMapper implements Mapper
+final readonly class EmojiLocaleMapper implements Mapper
 {
     public function __construct(
         public FileJson $sourceFile,

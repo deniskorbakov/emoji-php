@@ -6,7 +6,7 @@ namespace DenisKorbakov\EmojiPhp\Commands\Arguments;
 
 use DenisKorbakov\EmojiPhp\Commands\Arguments\Exceptions\EmptyArgument;
 
-final class ConsoleArguments implements Arguments
+final readonly class ConsoleArguments implements Arguments
 {
 	/** @param array<int, string> $arguments */
 	public function __construct(

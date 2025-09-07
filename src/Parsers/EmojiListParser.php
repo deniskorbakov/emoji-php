@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DenisKorbakov\EmojiPhp\Parsers;
 
-final class EmojiListParser implements Parser
+final readonly class EmojiListParser implements Parser
 {
 	public const string SEPARATOR = ':';
 
