@@ -1,6 +1,6 @@
 # Emoji PHP
 
-Library for Emogi in PHP - replacement, search, transformation by CLDR 
+Library for Emoji in PHP - replacement, search, transformation by CLDR 
 
 ## 🤝 Feedback
 
