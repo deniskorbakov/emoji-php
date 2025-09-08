@@ -8,40 +8,45 @@ use DenisKorbakov\EmojiPhp\Locale;
 
 final readonly class EmojiFilePath
 {
-	public const string EMOJIS_DATA_BASE_PATH = 'vendor/milesj/emojibase/packages/data/';
+    public const string EMOJIS_DATA_BASE_PATH = 'vendor/milesj/emojibase/packages/data/';
 
-	public const string EMOJI_FILE_NAME = '/compact.raw.json';
-	public const string CLDR_CODE_FILE_NAME = 'en/shortcodes/cldr.raw.json';
+    public const string EMOJI_FILENAME = '/compact.raw.json';
+    public const string EMOJI_GROUPS_FILENAME = '/messages.raw.json';
+    public const string CLDR_CODE_FILENAME = 'en/shortcodes/cldr.raw.json';
 
-	public const string EMOJI_LOCALE_DIR = 'emojis/locale/';
+    public const string EMOJI_LOCALE_DIR = 'emojis/locale/';
+    public const string EMOJI_LOCALE_EXTENSION = '.json';
 
-	public const string EMOJI_LOCALE_EXTENSION = '.json';
-
-	public const string EMOJI_LIST_FILENAME = 'emojis/list.php';
+    public const string EMOJI_LIST_FILENAME = 'emojis/list.php';
 
 
-	public function __construct(
-		public Locale $locale,
-	) {
-	}
+    public function __construct(
+        public Locale $locale,
+    ) {
+    }
 
-	public function emoji(): string
-	{
-		return self::EMOJIS_DATA_BASE_PATH . $this->locale->value . self::EMOJI_FILE_NAME;
-	}
+    public function emoji(): string
+    {
+        return self::EMOJIS_DATA_BASE_PATH . $this->locale->value . self::EMOJI_FILENAME;
+    }
 
-	public function cldr(): string
-	{
-		return self::EMOJIS_DATA_BASE_PATH . self::CLDR_CODE_FILE_NAME;
-	}
+    public function cldr(): string
+    {
+        return self::EMOJIS_DATA_BASE_PATH . self::CLDR_CODE_FILENAME;
+    }
 
-	public function emojiLocale(): string
-	{
-		return self::EMOJI_LOCALE_DIR . $this->locale->value . self::EMOJI_LOCALE_EXTENSION;
-	}
+    public function emojiLocale(): string
+    {
+        return self::EMOJI_LOCALE_DIR . $this->locale->value . self::EMOJI_LOCALE_EXTENSION;
+    }
 
-	public function list(): string
-	{
-		return self::EMOJI_LIST_FILENAME;
-	}
+    public function list(): string
+    {
+        return self::EMOJI_LIST_FILENAME;
+    }
+
+    public function groups(): string
+    {
+        return self::EMOJIS_DATA_BASE_PATH . $this->locale->value . self::EMOJI_GROUPS_FILENAME;
+    }
 }
