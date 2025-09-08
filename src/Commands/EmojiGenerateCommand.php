@@ -50,28 +50,28 @@ final readonly class EmojiGenerateCommand implements Command
                 new EmojiFilePath($locale)->emojiLocale()
             );
 
+            $groupsFile = new File(
+                new EmojiFilePath($locale)->groups()
+            );
+
             $emojisCldrCombined = new EmojiLocaleMapper(
                 new FileJson($emojiBaseLocaleFile),
-                new FileJson($emojiBaseCldrFile)
+                new FileJson($emojiBaseCldrFile),
+                new FileJson($groupsFile)
             )->combine();
 
             $emojiLocaleFile = new FileJson($emojiListFile);
-
-            if (! $emojiLocaleFile->exists()) {
-                $emojiLocaleFile->write($emojisCldrCombined);
-            }
+            $emojiLocaleFile->write($emojisCldrCombined);
 
             $emojiListFile = new File(
                 new EmojiFilePath($locale)->list()
             );
 
-            if (! $emojiListFile->exists()) {
-                $emojiListFile->write(
-                    new EmojiListTransformer(
-                        new EmojiListParser($emojisCldrCombined)->parse()
-                    )->transform()
-                );
-            }
+            $emojiListFile->write(
+                new EmojiListTransformer(
+                    new EmojiListParser($emojisCldrCombined)->parse()
+                )->transform()
+            );
 
             new ConsoleOutput(self::SUCCESS_SAVE)->success();
         } catch (Throwable $exception) {
