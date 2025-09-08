@@ -21,13 +21,15 @@ final readonly class FileJson
         return json_decode($this->file->read(), true);
     }
 
-    /**
-     * @throws FileNotFoundException
-     */
     public function write(array $data): void
     {
         $this->file->write(
             json_encode($data, JSON_PRETTY_PRINT)
         );
+    }
+
+    public function exists(): bool
+    {
+        return $this->file->exists();
     }
 }

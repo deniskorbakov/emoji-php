@@ -18,20 +18,17 @@ final readonly class File
      */
     public function read(): string
     {
-        if (! file_exists($this->filename)) {
+        if (! $this->exists()) {
             throw new FileNotFoundException($this->filename);
         }
 
         return file_get_contents($this->filename, true);
     }
 
-    /**
-     * @throws FileNotFoundException
-     */
     public function write(string $data): void
     {
-        if (! file_exists($this->filename)) {
-            throw new FileNotFoundException($this->filename);
+        if (! $this->exists()) {
+            $this->save();
         }
 
         file_put_contents($this->filename, $data);
