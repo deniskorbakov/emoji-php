@@ -26,11 +26,11 @@ final class Emojis
      */
     public function toEmoji(string $text): string
     {
-        $emojiFile = new File(
-            new EmojiFilePath($this->locale)->list()
-        );
-
-        return new CodeToEmojiReplacer($emojiFile, $text)->replace();
+        return new CodeToEmojiReplacer(
+            new File(
+                new EmojiFilePath($this->locale)->list()
+            ), $text
+        )->replace();
     }
 
     /**
@@ -40,11 +40,11 @@ final class Emojis
      */
     public function toCode(string $text): string
     {
-        $emojiFile = new File(
-            new EmojiFilePath($this->locale)->list()
-        );
-
-        return new EmojiToCodeReplacer($emojiFile, $text)->replace();
+        return new EmojiToCodeReplacer(
+            new File(
+                new EmojiFilePath($this->locale)->list()
+            ), $text
+        )->replace();
     }
 
     /**
@@ -73,10 +73,10 @@ final class Emojis
      */
     public function search(string $text): array
     {
-        $emojiLocaleFile = new File(
-            new EmojiFilePath($this->locale)->emojiLocale()
-        );
-
-        return new EmojiSearch($emojiLocaleFile, $text)->search();
+        return new EmojiSearch(
+            new File(
+                new EmojiFilePath($this->locale)->emojiLocale()
+            ), $text
+        )->search();
     }
 }
