@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DenisKorbakov\EmojiPhp\Searches;
 
 use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
+use DenisKorbakov\EmojiPhp\Files\File;
 use DenisKorbakov\EmojiPhp\Files\FileJson;
 use DenisKorbakov\EmojiPhp\Parsers\EmojiListParser;
 
@@ -13,7 +14,7 @@ final class EmojiSearch implements Search
     public const int MIN_COUNT_CHARS = 2;
 
     public function __construct(
-        public FileJson $emojiLocaleFile,
+        public File $emojiLocaleFile,
         public string $text,
     ) {
     }
@@ -23,7 +24,7 @@ final class EmojiSearch implements Search
      */
     public function search(): array
     {
-        $emojis = $this->emojiLocaleFile->read();
+        $emojis = new FileJson($this->emojiLocaleFile)->read();
         $searchText = trim($this->text);
 
         if (empty($searchText) || mb_strlen($searchText) < self::MIN_COUNT_CHARS) {
