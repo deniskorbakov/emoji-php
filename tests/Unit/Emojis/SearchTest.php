@@ -6,7 +6,7 @@ use DenisKorbakov\EmojiPhp\Emojis;
 use DenisKorbakov\EmojiPhp\Locale;
 
 test('success - search smile emoji', function () {
-    $result = new Emojis(Locale::RU)->search('уф');
+    $result = new Emojis()->search(Locale::RU, 'уф');
 
     expect($result)->toBeArray();
 });

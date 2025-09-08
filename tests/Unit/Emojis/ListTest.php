@@ -6,7 +6,7 @@ use DenisKorbakov\EmojiPhp\Emojis;
 use DenisKorbakov\EmojiPhp\Locale;
 
 test('success - get list emojis', function () {
-    $result = new Emojis(Locale::RU)->list();
+    $result = new Emojis()->list(Locale::RU);
 
     expect($result)->toBeArray();
 });
