@@ -9,7 +9,7 @@ use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
 use DenisKorbakov\EmojiPhp\Files\File;
 use DenisKorbakov\EmojiPhp\Files\FileJson;
 use DenisKorbakov\EmojiPhp\Locale;
-use DenisKorbakov\EmojiPhp\Parsers\EmojiListParser;
+use DenisKorbakov\EmojiPhp\Parsers\EmojiListMapParser;
 
 final class EmojiSearch implements Search
 {
@@ -55,7 +55,7 @@ final class EmojiSearch implements Search
 			}
 		}
 
-		return new EmojiListParser(
+		return new EmojiListMapParser(
 			$searchedEmojis,
 		)->parse();
 	}
