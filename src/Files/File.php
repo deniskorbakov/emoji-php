@@ -6,7 +6,7 @@ namespace DenisKorbakov\EmojiPhp\Files;
 
 use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
 
-final readonly class BaseFile
+final readonly class File
 {
     public function __construct(
         public string $filename,

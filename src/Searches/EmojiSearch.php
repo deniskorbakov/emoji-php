@@ -6,7 +6,7 @@ namespace DenisKorbakov\EmojiPhp\Searches;
 
 use DenisKorbakov\EmojiPhp\Files\EmojiFilePath;
 use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
-use DenisKorbakov\EmojiPhp\Files\BaseFile;
+use DenisKorbakov\EmojiPhp\Files\File;
 use DenisKorbakov\EmojiPhp\Files\FileJson;
 use DenisKorbakov\EmojiPhp\Locale;
 use DenisKorbakov\EmojiPhp\Parsers\EmojiListMapParser;
@@ -27,7 +27,7 @@ final class EmojiSearch implements Search
 	public function search(): array
 	{
 		$emojis = new FileJson(
-			new BaseFile(
+			new File(
 				new EmojiFilePath($this->locale)->emojiLocale()
 			),
 		)->read();
