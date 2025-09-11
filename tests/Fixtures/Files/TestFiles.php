@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Fixtures\Files;
+namespace Tests\Fixtures\Files;
 
 use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
 use DenisKorbakov\EmojiPhp\Files\File;
