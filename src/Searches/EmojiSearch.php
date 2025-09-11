@@ -13,88 +13,48 @@ use DenisKorbakov\EmojiPhp\Parsers\EmojiListMapParser;
 
 final class EmojiSearch implements Search
 {
-	public const int MIN_COUNT_CHARS = 2;
+    public const int MIN_COUNT_CHARS = 2;
 
-	public function __construct(
-		public Locale $locale,
-		public string $text,
-	) {
-	}
+    public function __construct(
+        public Locale $locale,
+        public string $text,
+    ) {
+    }
 
-	/**
-	 * @throws FileNotFoundException
-	 */
-	public function search(): array
-	{
-		$emojis = new FileJson(
-			new File(
-				new EmojiFilePath($this->locale)->emojiLocale()
-			),
-		)->read();
+    /**
+     * @throws FileNotFoundException
+     */
+    public function search(): array
+    {
+        $emojis = new FileJson(
+            new File(
+                new EmojiFilePath($this->locale)->emojiLocale()
+            ),
+        )->read();
 
-		$searchText = trim($this->text);
+        $searchText = trim($this->text);
 
-		if (empty($searchText) || mb_strlen($searchText) < self::MIN_COUNT_CHARS) {
-			return [];
-		}
+        if (empty($searchText) || mb_strlen($searchText) < self::MIN_COUNT_CHARS) {
+            return [];
+        }
 
-		$searchedEmojis = [];
+        $searchedEmojis = [];
 
-		foreach ($emojis as $emoji) {
-			$emojiByLabel = $this->searchByLabel($emoji, $searchText);
+        foreach ($emojis as $emoji) {
+            $emojiByLabel = new EmojiLabelSearch($emoji, $searchText)->search();
+            if (! empty($emojiByLabel)) {
+                $searchedEmojis[] = $emojiByLabel;
+                continue;
+            }
 
-			if (!empty($emojiByLabel)) {
-				$searchedEmojis[] = $emojiByLabel;
-				continue;
-			}
+            $emojiByTags = new EmojiTagsSearch($emoji, $searchText)->search();
+            if (! empty($emojiByTags)) {
+                $searchedEmojis[] = $emojiByTags;
+            }
+        }
 
-			$emojiByTags = $this->searchByTags($emoji, $searchText);
-
-			if (!empty($emojiByTags)) {
-				$searchedEmojis[] = $emojiByTags;
-			}
-		}
-
-		return new EmojiListMapParser(
-			$searchedEmojis,
-		)->parse();
-	}
-
-	public function searchByLabel(array $emoji, string $searchText): array
-	{
-		if (!array_key_exists('label', $emoji)) {
-			return [];
-		}
-
-		$label = $emoji['label'];
-
-		if (!isset($label)) {
-			return [];
-		}
-
-		if (false === stripos($label, $searchText)) {
-			return [];
-		}
-
-		return $emoji;
-	}
-
-	public function searchByTags(array $emoji, string $searchText): array
-	{
-		if (!array_key_exists('tags', $emoji)) {
-			return [];
-		}
-
-		$tags = $emoji['tags'];
-
-		if (!isset($tags) || !is_array($tags)) {
-			return [];
-		}
-
-		if (array_any($tags, fn($tag) => false !== stripos($tag, $searchText))) {
-			return $emoji;
-		}
-
-		return [];
-	}
+        return new EmojiListMapParser(
+            $searchedEmojis,
+        )->parse();
+    }
 }
