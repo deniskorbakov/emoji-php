@@ -9,7 +9,7 @@ use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
 final readonly class FileJson
 {
     public function __construct(
-        public File $file,
+        public BaseFile $file,
     ) {
     }
 

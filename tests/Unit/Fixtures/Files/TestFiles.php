@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Fixtures\Files;
 
 use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
-use DenisKorbakov\EmojiPhp\Files\File;
+use DenisKorbakov\EmojiPhp\Files\BaseFile;
 
 final class TestFiles
 {
@@ -14,7 +14,7 @@ final class TestFiles
      */
     public function emojiRuData(): string
     {
-        return new File('tests/Unit/Fixtures/Texts/ru_emoji.txt')->read();
+        return new BaseFile('tests/Unit/Fixtures/Texts/ru_emoji.txt')->read();
     }
 
     /**
@@ -22,7 +22,7 @@ final class TestFiles
      */
     public function codeRuData(): string
     {
-        return new File('tests/Unit/Fixtures/Texts/ru_code.txt')->read();
+        return new BaseFile('tests/Unit/Fixtures/Texts/ru_code.txt')->read();
     }
 
     /**
@@ -30,7 +30,7 @@ final class TestFiles
      */
     public function emojiEnData(): string
     {
-        return new File('tests/Unit/Fixtures/Texts/en_emoji.txt')->read();
+        return new BaseFile('tests/Unit/Fixtures/Texts/en_emoji.txt')->read();
     }
 
     /**
@@ -38,7 +38,7 @@ final class TestFiles
      */
     public function codeEnData(): string
     {
-        return new File('tests/Unit/Fixtures/Texts/en_code.txt')->read();
+        return new BaseFile('tests/Unit/Fixtures/Texts/en_code.txt')->read();
     }
 
     /**
@@ -46,7 +46,7 @@ final class TestFiles
      */
     public function textRuData(): string
     {
-        return new File('tests/Unit/Fixtures/Texts/ru_empty.txt')->read();
+        return new BaseFile('tests/Unit/Fixtures/Texts/ru_empty.txt')->read();
     }
 
     /**
@@ -54,7 +54,7 @@ final class TestFiles
      */
     public function textEnData(): string
     {
-        return new File('tests/Unit/Fixtures/Texts/en_empty.txt')->read();
+        return new BaseFile('tests/Unit/Fixtures/Texts/en_empty.txt')->read();
     }
 
     public function emptyData(): string

@@ -7,7 +7,7 @@ namespace DenisKorbakov\EmojiPhp\Commands;
 use DenisKorbakov\EmojiPhp\Commands\Arguments\Arguments;
 use DenisKorbakov\EmojiPhp\Commands\Outputs\ConsoleOutput;
 use DenisKorbakov\EmojiPhp\Files\EmojiFilePath;
-use DenisKorbakov\EmojiPhp\Files\File;
+use DenisKorbakov\EmojiPhp\Files\BaseFile;
 use DenisKorbakov\EmojiPhp\Files\FileJson;
 use DenisKorbakov\EmojiPhp\Locale;
 use DenisKorbakov\EmojiPhp\Mappers\EmojiLocaleMapper;
@@ -38,19 +38,19 @@ final readonly class EmojiGenerateCommand implements Command
                 new ConsoleOutput(self::ERROR_LOCALE)->error();
             }
 
-            $emojiBaseLocaleFile = new File(
+            $emojiBaseLocaleFile = new BaseFile(
                 new EmojiFilePath($locale)->emoji()
             );
 
-            $emojiBaseCldrFile = new File(
+            $emojiBaseCldrFile = new BaseFile(
                 new EmojiFilePath($locale)->cldr()
             );
 
-            $emojiListFile = new File(
+            $emojiListFile = new BaseFile(
                 new EmojiFilePath($locale)->emojiLocale()
             );
 
-            $groupsFile = new File(
+            $groupsFile = new BaseFile(
                 new EmojiFilePath($locale)->groups()
             );
 
@@ -63,7 +63,7 @@ final readonly class EmojiGenerateCommand implements Command
             $emojiLocaleFile = new FileJson($emojiListFile);
             $emojiLocaleFile->write($emojisCldrCombined);
 
-            $emojiListFile = new File(
+            $emojiListFile = new BaseFile(
                 new EmojiFilePath($locale)->list()
             );
 

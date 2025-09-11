@@ -6,7 +6,7 @@ namespace DenisKorbakov\EmojiPhp\Replacers;
 
 use DenisKorbakov\EmojiPhp\Files\EmojiFilePath;
 use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
-use DenisKorbakov\EmojiPhp\Files\File;
+use DenisKorbakov\EmojiPhp\Files\BaseFile;
 use DenisKorbakov\EmojiPhp\Locale;
 
 final readonly class EmojiToCodeReplacer implements Replacer
@@ -21,7 +21,7 @@ final readonly class EmojiToCodeReplacer implements Replacer
      */
     public function replace(): string
     {
-        $emojis = new File(
+        $emojis = new BaseFile(
             new EmojiFilePath(Locale::EN)->list()
         )->execute();
 

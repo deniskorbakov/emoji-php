@@ -6,7 +6,7 @@ namespace DenisKorbakov\EmojiPhp\Collections;
 
 use DenisKorbakov\EmojiPhp\Files\EmojiFilePath;
 use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
-use DenisKorbakov\EmojiPhp\Files\File;
+use DenisKorbakov\EmojiPhp\Files\BaseFile;
 use DenisKorbakov\EmojiPhp\Files\FileJson;
 use DenisKorbakov\EmojiPhp\Locale;
 
@@ -23,7 +23,7 @@ final class EmojiCollection implements Collection
 	public function collect(): array
 	{
 		$emojis = new FileJson(
-			new File(
+			new BaseFile(
 				new EmojiFilePath($this->locale)->emojiLocale()
 			)
 		)->read();
