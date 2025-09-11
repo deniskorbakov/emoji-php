@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DenisKorbakov\EmojiPhp;
 
 use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
-use DenisKorbakov\EmojiPhp\Lists\EmojiList;
+use DenisKorbakov\EmojiPhp\Collections\EmojiCollection;
 use DenisKorbakov\EmojiPhp\Replacers\CodeToEmojiReplacer;
 use DenisKorbakov\EmojiPhp\Replacers\EmojiToCodeReplacer;
 use DenisKorbakov\EmojiPhp\Searches\EmojiSearch;
@@ -40,7 +40,7 @@ final class Emojis
      */
     public function list(Locale $locale): array
     {
-        return new EmojiList($locale)->list();
+        return new EmojiCollection($locale)->collect();
     }
 
     /**

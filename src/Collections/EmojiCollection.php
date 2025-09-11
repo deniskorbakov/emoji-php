@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DenisKorbakov\EmojiPhp\Lists;
+namespace DenisKorbakov\EmojiPhp\Collections;
 
 use DenisKorbakov\EmojiPhp\Files\EmojiFilePath;
 use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
@@ -10,7 +10,7 @@ use DenisKorbakov\EmojiPhp\Files\File;
 use DenisKorbakov\EmojiPhp\Files\FileJson;
 use DenisKorbakov\EmojiPhp\Locale;
 
-final class EmojiList
+final class EmojiCollection implements Collection
 {
 	public function __construct(
 		public Locale $locale,
@@ -20,7 +20,7 @@ final class EmojiList
 	/**
 	 * @throws FileNotFoundException
 	 */
-	public function list(): array
+	public function collect(): array
 	{
 		$emojis = new FileJson(
 			new File(
