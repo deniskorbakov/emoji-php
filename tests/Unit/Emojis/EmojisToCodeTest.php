@@ -3,12 +3,11 @@
 declare(strict_types=1);
 
 use DenisKorbakov\EmojiPhp\Emojis;
-use DenisKorbakov\EmojiPhp\Locale;
-use DenisKorbakov\EmojiPhp\Files\File;
+use Tests\Unit\Fixtures\Files\TextFiles;
 
 test('success - emoji to code with ru locale', function () {
-    $textWithEmoji = new File('tests/Unit/Fixtures/Texts/ru_emoji.txt')->read();
-    $textWithCode = new File('tests/Unit/Fixtures/Texts/ru_code.txt')->read();
+    $textWithEmoji = new TextFiles()->emojiRuData();
+    $textWithCode = new TextFiles()->codeRuData();
 
     $result = new Emojis()->toCode($textWithEmoji);
 
@@ -16,8 +15,8 @@ test('success - emoji to code with ru locale', function () {
 });
 
 test('success - emoji to code with en locale', function () {
-    $textWithEmoji = new File('tests/Unit/Fixtures/Texts/en_emoji.txt')->read();
-    $textWithCode = new File('tests/Unit/Fixtures/Texts/en_code.txt')->read();
+    $textWithEmoji = new TextFiles()->emojiEnData();
+    $textWithCode = new TextFiles()->codeEnData();
 
     $result = new Emojis()->toCode($textWithEmoji);
 
