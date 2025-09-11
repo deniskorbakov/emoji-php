@@ -36,6 +36,7 @@ final readonly class EmojiGenerateCommand implements Command
 
             if (null === $locale) {
                 new ConsoleOutput(self::ERROR_LOCALE)->error();
+                return;
             }
 
             $emojiBaseLocaleFile = new File(

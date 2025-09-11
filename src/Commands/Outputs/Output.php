@@ -6,7 +6,7 @@ namespace DenisKorbakov\EmojiPhp\Commands\Outputs;
 
 interface Output
 {
-    public function error(): never;
+    public function error(): void;
 
     public function success(): void;
 }

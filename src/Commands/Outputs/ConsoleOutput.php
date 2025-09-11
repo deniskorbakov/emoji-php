@@ -14,10 +14,9 @@ final readonly class ConsoleOutput implements Output
     ) {
     }
 
-    public function error(): never
+    public function error(): void
     {
         echo self::ERROR_PREFIX . $this->message . PHP_EOL;
-        exit(1);
     }
 
     public function success(): void
