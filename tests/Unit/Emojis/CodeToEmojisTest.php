@@ -14,6 +14,12 @@ test('success - code to emoji with ru locale', function () {
     expect($result)->toBe($textWithEmoji);
 });
 
+test('success - simple text with ru locale', function () {
+    $text = new TestFiles()->textRuData();
+
+    expect(new Emojis()->toEmoji($text))->toBe($text);
+});
+
 test('success - code to emoji with en locale', function () {
     $textWithEmoji = new TestFiles()->emojiEnData();
     $textWithCode = new TestFiles()->codeEnData();
@@ -21,5 +27,17 @@ test('success - code to emoji with en locale', function () {
     $result = new Emojis()->toEmoji($textWithCode);
 
     expect($result)->toBe($textWithEmoji);
+});
+
+test('success - simple text with en locale', function () {
+    $text = new TestFiles()->textEnData();
+
+    expect(new Emojis()->toEmoji($text))->toBe($text);
+});
+
+test('success - empty text', function () {
+    $emptyText = new TestFiles()->emptyData();
+
+    expect(new Emojis()->toEmoji($emptyText))->toBe($emptyText);
 });
 

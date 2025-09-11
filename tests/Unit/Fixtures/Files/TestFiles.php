@@ -44,7 +44,7 @@ final class TestFiles
     /**
      * @throws FileNotFoundException
      */
-    public function emptyRuData(): string
+    public function textRuData(): string
     {
         return new File('tests/Unit/Fixtures/Texts/ru_empty.txt')->read();
     }
@@ -52,16 +52,13 @@ final class TestFiles
     /**
      * @throws FileNotFoundException
      */
-    public function emptyEnData(): string
+    public function textEnData(): string
     {
         return new File('tests/Unit/Fixtures/Texts/en_empty.txt')->read();
     }
 
-    /**
-     * @throws FileNotFoundException
-     */
-    public function notFoundData(): string
+    public function emptyData(): string
     {
-        return new File('not_found_file')->read();
+        return '';
     }
 }
