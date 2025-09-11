@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use DenisKorbakov\EmojiPhp\Emojis;
-use Tests\Unit\Fixtures\Files\TestFiles;
+use Tests\Fixtures\Files\TestFiles;
 
 test('success - emoji to code with ru locale', function () {
     $textWithEmoji = new TestFiles()->emojiRuData();
