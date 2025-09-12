@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-
 use DenisKorbakov\EmojiPhp\Files\File;
 use DenisKorbakov\EmojiPhp\Files\FileJson;
 
-test('success - exists method delegates to file exists', function () {
+test('success - exists method delegates to file exists', function (): void {
     $existingFile = tempnam(sys_get_temp_dir(), 'test') . '.json';
     $nonExistingFile = '/non/existent/file.json';
 

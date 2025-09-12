@@ -6,7 +6,7 @@ use DenisKorbakov\EmojiPhp\Files\File;
 use DenisKorbakov\EmojiPhp\Files\FileJson;
 use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
 
-test('success - read method decodes json from file', function () {
+test('success - read method decodes json from file', function (): void {
     $tempFile = tempnam(sys_get_temp_dir(), 'test') . '.json';
     file_put_contents($tempFile, '{"key": "value", "number": 123}');
 
@@ -18,7 +18,7 @@ test('success - read method decodes json from file', function () {
     unlink($tempFile);
 });
 
-test('fail read method throws exception for non-existent file', function () {
+test('fail read method throws exception for non-existent file', function (): void {
     $file = new File('/non/existent/file.json');
     $fileJson = new FileJson($file);
 

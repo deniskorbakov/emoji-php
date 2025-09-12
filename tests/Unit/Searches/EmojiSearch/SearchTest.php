@@ -5,19 +5,19 @@ declare(strict_types=1);
 use DenisKorbakov\EmojiPhp\Locale;
 use DenisKorbakov\EmojiPhp\Searches\EmojiSearch;
 
-test('search returns empty array for empty text', function () {
+test('search returns empty array for empty text', function (): void {
     $search = new EmojiSearch(Locale::EN, '');
 
     expect($search->search())->toBe([]);
 });
 
-test('search returns empty array for short text', function () {
+test('search returns empty array for short text', function (): void {
     $search = new EmojiSearch(Locale::EN, 'a');
 
     expect($search->search())->toBe([]);
 });
 
-test('success - search', function () {
+test('success - search', function (): void {
     $search = new EmojiSearch(Locale::RU, 'уф');
 
     expect($search->search())->toHaveCount(4);

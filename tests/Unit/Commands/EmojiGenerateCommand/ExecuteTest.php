@@ -6,8 +6,8 @@ use DenisKorbakov\EmojiPhp\Commands\Arguments\Arguments;
 use DenisKorbakov\EmojiPhp\Commands\EmojiGenerateCommand;
 use Mockery\MockInterface;
 
-test('success - execute command', function () {
-    $arguments = mock(Arguments::class, function (MockInterface $mock) {
+test('success - execute command', function (): void {
+    $arguments = mock(Arguments::class, function (MockInterface $mock): void {
         $mock->shouldReceive('show')->with(1)->andReturn('ru');
     });
 
@@ -18,8 +18,8 @@ test('success - execute command', function () {
     expect($output)->toContain(EmojiGenerateCommand::SUCCESS_SAVE);
 });
 
-test('fail - locale not found execute command', function () {
-    $arguments = mock(Arguments::class, function (MockInterface $mock) {
+test('fail - locale not found execute command', function (): void {
+    $arguments = mock(Arguments::class, function (MockInterface $mock): void {
         $mock->shouldReceive('show')->with(1)->andReturn('ruz');
     });
 

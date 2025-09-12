@@ -5,7 +5,7 @@ declare(strict_types=1);
 use DenisKorbakov\EmojiPhp\Files\File;
 use DenisKorbakov\EmojiPhp\Files\FileJson;
 
-test('success - write method encodes array to json and writes to file', function () {
+test('success - write method encodes array to json and writes to file', function (): void {
     $tempFile = tempnam(sys_get_temp_dir(), 'test') . '.json';
     $file = new File($tempFile);
     $fileJson = new FileJson($file);
@@ -20,7 +20,7 @@ test('success - write method encodes array to json and writes to file', function
     unlink($tempFile);
 });
 
-test('success - write method creates file if not exists', function () {
+test('success - write method creates file if not exists', function (): void {
     $tempFile = sys_get_temp_dir() . '/test_write.json';
     if (file_exists($tempFile)) {
         unlink($tempFile);

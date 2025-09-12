@@ -33,9 +33,11 @@ final class EmojiCollection implements Collection
         $emojisList = [];
 
         foreach ($emojis as $emoji) {
-            if (! array_key_exists('group', $emoji) &&
+            if (
+                ! array_key_exists('group', $emoji) &&
                 ! array_key_exists('unicode', $emoji) &&
-                ! array_key_exists('code', $emoji)) {
+                ! array_key_exists('code', $emoji)
+            ) {
                 continue;
             }
 

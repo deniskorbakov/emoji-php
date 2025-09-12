@@ -8,7 +8,7 @@ use DenisKorbakov\EmojiPhp\Files\FileJson;
 use DenisKorbakov\EmojiPhp\Locale;
 use DenisKorbakov\EmojiPhp\Parsers\EmojiListParser;
 
-test('success - emoji list parse', function () {
+test('success - emoji list parse', function (): void {
     $locale = Locale::RU;
 
     $emojiLocale = new FileJson(

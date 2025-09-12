@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DenisKorbakov\EmojiPhp\Files\Exceptions;
 
 use Exception;
-use Throwable;
 
 final class JsonEncodeException extends Exception
 {

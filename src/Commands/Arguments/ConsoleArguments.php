@@ -8,26 +8,26 @@ use DenisKorbakov\EmojiPhp\Commands\Arguments\Exceptions\EmptyArgument;
 
 final readonly class ConsoleArguments implements Arguments
 {
-	/** @param array<int, string> $arguments */
-	public function __construct(
-		public array $arguments,
-	) {
-	}
+    /** @param array<int, string> $arguments */
+    public function __construct(
+        public array $arguments,
+    ) {
+    }
 
-	/**
-	 * @throws EmptyArgument
-	 */
-	public function show(int $key): string
-	{
-		if (!array_key_exists($key, $this->arguments)) {
-			throw new EmptyArgument();
-		}
+    /**
+     * @throws EmptyArgument
+     */
+    public function show(int $key): string
+    {
+        if (!array_key_exists($key, $this->arguments)) {
+            throw new EmptyArgument();
+        }
 
-		return $this->arguments[$key];
-	}
+        return $this->arguments[$key];
+    }
 
-	public function all(): array
-	{
-		return $this->arguments;
-	}
+    public function all(): array
+    {
+        return $this->arguments;
+    }
 }

@@ -49,7 +49,6 @@ final class Emojis
      * Search works only from 2 characters
      *
      * @param Locale $locale
-     * @param string $text
      * @return array<string, string>
      * @throws FileNotFoundException
      */

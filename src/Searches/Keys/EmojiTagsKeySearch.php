@@ -29,7 +29,7 @@ final class EmojiTagsKeySearch implements Search
             return [];
         }
 
-        if (array_any($tags, fn($tag) => false !== stripos($tag, $this->searchText))) {
+        if (array_any($tags, fn($tag): bool => false !== stripos($tag, $this->searchText))) {
             return $this->emoji;
         }
 

@@ -5,7 +5,7 @@ declare(strict_types=1);
 use DenisKorbakov\EmojiPhp\Files\File;
 use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
 
-test('success - execute method includes php file and returns result', function () {
+test('success - execute method includes php file and returns result', function (): void {
     $filename = tempnam(sys_get_temp_dir(), 'test') . '.php';
     file_put_contents($filename, '<?php return "executed";');
 
@@ -16,7 +16,7 @@ test('success - execute method includes php file and returns result', function (
     unlink($filename);
 });
 
-test('fail - execute method throws exception for non-existent php file', function () {
+test('fail - execute method throws exception for non-existent php file', function (): void {
     $file = new File('/non/existent/file.php');
 
     $file->execute();

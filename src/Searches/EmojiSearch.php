@@ -38,7 +38,7 @@ final class EmojiSearch implements Search
 
         $searchText = trim($this->text);
 
-        if (empty($searchText) || mb_strlen($searchText) < self::MIN_COUNT_CHARS) {
+        if ($searchText === '' || $searchText === '0' || mb_strlen($searchText) < self::MIN_COUNT_CHARS) {
             return [];
         }
 
@@ -46,13 +46,13 @@ final class EmojiSearch implements Search
 
         foreach ($emojis as $emoji) {
             $emojiByLabel = new EmojiLabelKeySearch($emoji, $searchText)->search();
-            if (! empty($emojiByLabel)) {
+            if ($emojiByLabel !== []) {
                 $searchedEmojis[] = $emojiByLabel;
                 continue;
             }
 
             $emojiByTags = new EmojiTagsKeySearch($emoji, $searchText)->search();
-            if (! empty($emojiByTags)) {
+            if ($emojiByTags !== []) {
                 $searchedEmojis[] = $emojiByTags;
             }
         }

@@ -8,7 +8,7 @@ use DenisKorbakov\EmojiPhp\Files\FileJson;
 use DenisKorbakov\EmojiPhp\Mappers\EmojiLocaleMap;
 use DenisKorbakov\EmojiPhp\Locale;
 
-test('success - emoji locale map combine', function () {
+test('success - emoji locale map combine', function (): void {
     $locale = Locale::RU;
 
     $emojisCldrCombined = new EmojiLocaleMap(
@@ -31,4 +31,3 @@ test('success - emoji locale map combine', function () {
 
     expect($emojisCldrCombined)->toBeArray();
 });
-

@@ -6,7 +6,7 @@ use DenisKorbakov\EmojiPhp\Emojis;
 use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
 use DenisKorbakov\EmojiPhp\Locale;
 
-test('success - search ru smile emoji', function () {
+test('success - search ru smile emoji', function (): void {
     $result = new Emojis()->search(Locale::RU, 'уф');
 
     expect($result)
@@ -21,7 +21,7 @@ test('success - search ru smile emoji', function () {
         );
 });
 
-test('success - search en smile emoji', function () {
+test('success - search en smile emoji', function (): void {
     $result = new Emojis()->search(Locale::EN, 'sh');
 
     expect($result)
@@ -36,7 +36,7 @@ test('success - search en smile emoji', function () {
         );
 });
 
-test('success - search one char text smile emoji', function () {
+test('success - search one char text smile emoji', function (): void {
     $result = new Emojis()->search(Locale::RU, 'y');
 
     expect($result)
@@ -44,7 +44,7 @@ test('success - search one char text smile emoji', function () {
         ->toBeEmpty();
 });
 
-test('success - search empty text smile emoji', function () {
+test('success - search empty text smile emoji', function (): void {
     $result = new Emojis()->search(Locale::RU, '');
 
     expect($result)
@@ -52,6 +52,6 @@ test('success - search empty text smile emoji', function () {
         ->toBeEmpty();
 });
 
-test('fail - not found locale', function () {
+test('fail - not found locale', function (): void {
     new Emojis()->search(Locale::ET, 'inimesed');
 })->throws(FileNotFoundException::class);

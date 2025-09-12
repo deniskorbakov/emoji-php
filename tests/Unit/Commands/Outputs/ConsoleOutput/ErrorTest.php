@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use DenisKorbakov\EmojiPhp\Commands\Outputs\ConsoleOutput;
 
-test('success - echo error', function () {
+test('success - echo error', function (): void {
     $message = 'text error';
 
     ob_start();

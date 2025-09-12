@@ -11,7 +11,7 @@ final class FileNotFoundException extends Exception
 {
     public function __construct(string $filename = "", int $code = 0, ?Throwable $previous = null)
     {
-        $message = "File $filename not found";
+        $message = sprintf('File %s not found', $filename);
         parent::__construct($message, $code, $previous);
     }
 }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 use DenisKorbakov\EmojiPhp\Files\File;
 use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
 
-test('success - read method reads file content', function () {
+test('success - read method reads file content', function (): void {
     $filename = tempnam(sys_get_temp_dir(), 'test');
     file_put_contents($filename, 'test content');
 
@@ -16,7 +16,7 @@ test('success - read method reads file content', function () {
     unlink($filename);
 });
 
-test('fail - read method throws exception for non-existent file', function () {
+test('fail - read method throws exception for non-existent file', function (): void {
     $file = new File('/non/existent/file.txt');
 
     $file->read();

@@ -6,8 +6,8 @@ namespace DenisKorbakov\EmojiPhp\Commands\Arguments;
 
 interface Arguments
 {
-	/** @return array<int, string> */
-	public function all(): array;
+    /** @return array<int, string> */
+    public function all(): array;
 
-	public function show(int $key): string;
+    public function show(int $key): string;
 }

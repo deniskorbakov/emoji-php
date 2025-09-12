@@ -6,7 +6,6 @@ namespace DenisKorbakov\EmojiPhp\Files;
 
 use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
 use DenisKorbakov\EmojiPhp\Files\Exceptions\JsonEncodeException;
-use Illuminate\Database\Eloquent\JsonEncodingException;
 
 final readonly class FileJson
 {
@@ -33,7 +32,6 @@ final readonly class FileJson
 
     /**
      * @param array<string|int, mixed> $data
-     * @return void
      * @throws JsonEncodeException
      */
     public function write(array $data): void
