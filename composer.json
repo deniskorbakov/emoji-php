@@ -31,7 +31,6 @@
   "scripts": {
     "tests": "pest --stop-on-failure --colors",
     "tests-coverage": "pest --coverage --min=90",
-    "tests-mutation": "pest --mutate",
     "lint": [
       "@phpstan",
       "@cs",
