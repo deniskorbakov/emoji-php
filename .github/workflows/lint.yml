@@ -20,7 +20,7 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pdo, sqlite, pdo_sqlite, bcmath, intl, gd
 
       - name: Install dependencies
-        run: composer install
+        run: composer install --dev
 
       - name: Run lint code
         run: composer lint
