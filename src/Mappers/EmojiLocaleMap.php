@@ -30,6 +30,7 @@ final readonly class EmojiLocaleMap implements Map
         $groups = $this->groupsFile->read();
 
         foreach ($emojis as $key => &$emoji) {
+            /** @var string $hexCodeKey */
             $hexCodeKey = $emoji['hexcode'];
 
             $emoji['code'] = $cldrCodes[$hexCodeKey] ?? null;
@@ -41,6 +42,7 @@ final readonly class EmojiLocaleMap implements Map
                 continue;
             }
 
+            /** @var string $groupNumber */
             $groupNumber = $emoji['group'];
 
             $emoji['group'] = $groups['groups'][$groupNumber]['message'];
