@@ -37,6 +37,10 @@
       "@cs",
       "@rector"
     ],
+    "lint-fix": [
+      "phpcbf",
+      "rector"
+    ],
     "phpstan": "phpstan analyse --memory-limit=2G",
     "rector": "rector",
     "cs": "phpcs",

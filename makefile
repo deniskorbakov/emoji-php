@@ -21,6 +21,10 @@ install:
 lint:
 	docker exec -i emojis composer lint
 
+# command for run lint code
+lint-fix:
+	docker exec -i emojis composer lint-fix
+
 # command for run tests
 test:
 	docker exec -i emojis composer tests
