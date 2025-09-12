@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace DenisKorbakov\EmojiPhp;
 
-use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
 use DenisKorbakov\EmojiPhp\Collections\EmojiCollection;
+use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
 use DenisKorbakov\EmojiPhp\Replacers\CodeToEmojiReplacer;
 use DenisKorbakov\EmojiPhp\Replacers\EmojiToCodeReplacer;
 use DenisKorbakov\EmojiPhp\Searches\EmojiSearch;
@@ -35,7 +35,7 @@ final class Emojis
     /**
      * Get list emojis unicode with code group by category
      *
-     * @return array<string, string>
+     * @return array<string, array<string, string>>
      * @throws FileNotFoundException
      */
     public function list(Locale $locale): array
@@ -50,7 +50,7 @@ final class Emojis
      *
      * @param Locale $locale
      * @param string $text
-     * @return array
+     * @return array<string, string>
      * @throws FileNotFoundException
      */
     public function search(Locale $locale, string $text): array

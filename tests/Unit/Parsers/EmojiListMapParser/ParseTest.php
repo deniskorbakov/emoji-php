@@ -6,7 +6,7 @@ use DenisKorbakov\EmojiPhp\Files\EmojiFilePath;
 use DenisKorbakov\EmojiPhp\Files\File;
 use DenisKorbakov\EmojiPhp\Files\FileJson;
 use DenisKorbakov\EmojiPhp\Locale;
-use DenisKorbakov\EmojiPhp\Parsers\EmojiListMapParser;
+use DenisKorbakov\EmojiPhp\Parsers\Maps\EmojiListMapParser;
 
 test('success - emoji list map parse', function () {
     $locale = Locale::RU;

@@ -22,7 +22,13 @@ final readonly class File
             throw new FileNotFoundException($this->filename);
         }
 
-        return file_get_contents($this->filename, true);
+        $content = file_get_contents($this->filename, true);
+
+        if ($content === false) {
+            throw new FileNotFoundException($this->filename);
+        }
+
+        return $content;
     }
 
     public function write(string $data): void

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DenisKorbakov\EmojiPhp\Parsers;
+namespace DenisKorbakov\EmojiPhp\Parsers\Maps;
 
-final readonly class EmojiListParser implements Parser
+final readonly class EmojiListMapParser implements MapParser
 {
     public const string SEPARATOR = ':';
 
@@ -14,7 +14,7 @@ final readonly class EmojiListParser implements Parser
     ) {
     }
 
-    /** @return list<string> */
+    /** @return array<string, string> */
     public function parse(): array
     {
         $emojisList = [];
@@ -29,7 +29,7 @@ final readonly class EmojiListParser implements Parser
 
             $cldrCode = self::SEPARATOR . $emoji['code'] . self::SEPARATOR;
 
-            $emojisList[] = sprintf("'%s'=>'%s'", $emojiUnicode, $cldrCode);
+            $emojisList[$emojiUnicode] = $cldrCode;
         }
 
         return $emojisList;

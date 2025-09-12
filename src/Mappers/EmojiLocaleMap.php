@@ -17,12 +17,16 @@ final readonly class EmojiLocaleMap implements Map
     }
 
     /**
+     * @return array<int, array<string, mixed>>
      * @throws FileNotFoundException
      */
     public function combine(): array
     {
+        /** @var array<int, array<string, mixed>> $emojis */
         $emojis = $this->localeFile->read();
+        /** @var array<int, array<string, mixed>> $cldrCodes */
         $cldrCodes = $this->cldrFile->read();
+        /** @var array<string, array<int, array<string, mixed>>> $groups */
         $groups = $this->groupsFile->read();
 
         foreach ($emojis as $key => &$emoji) {
@@ -39,7 +43,7 @@ final readonly class EmojiLocaleMap implements Map
 
             $groupNumber = $emoji['group'];
 
-            $emoji['group'] = $groups['groups'][$groupNumber]['message'] ?? null;
+            $emoji['group'] = $groups['groups'][$groupNumber]['message'];
 
             if (array_key_exists('order', $emoji)) {
                 unset($emoji['order']);

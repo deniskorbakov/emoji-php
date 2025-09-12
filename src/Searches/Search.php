@@ -6,5 +6,6 @@ namespace DenisKorbakov\EmojiPhp\Searches;
 
 interface Search
 {
+    /** @return array<string, string> */
     public function search(): array;
 }

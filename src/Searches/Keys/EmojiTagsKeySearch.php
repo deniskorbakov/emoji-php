@@ -2,26 +2,30 @@
 
 declare(strict_types=1);
 
-namespace DenisKorbakov\EmojiPhp\Searches;
+namespace DenisKorbakov\EmojiPhp\Searches\Keys;
 
-final class EmojiTagsSearch implements Search
+use DenisKorbakov\EmojiPhp\Searches\Search;
+
+final class EmojiTagsKeySearch implements Search
 {
+    /** @param array<string, string|array<int, string>> $emoji */
     public function __construct(
         public array $emoji,
         public string $searchText,
     ) {
     }
 
-
+    /** @return array<string, string|array<int, string>> */
     public function search(): array
     {
         if (! array_key_exists('tags', $this->emoji)) {
             return [];
         }
 
+        /** @var array<int, string> $tags */
         $tags = $this->emoji['tags'];
 
-        if (! isset($tags) || ! is_array($tags)) {
+        if (empty($tags)) {
             return [];
         }
 

@@ -9,7 +9,9 @@ use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
 use DenisKorbakov\EmojiPhp\Files\File;
 use DenisKorbakov\EmojiPhp\Files\FileJson;
 use DenisKorbakov\EmojiPhp\Locale;
-use DenisKorbakov\EmojiPhp\Parsers\EmojiListMapParser;
+use DenisKorbakov\EmojiPhp\Parsers\Maps\EmojiListMapParser;
+use DenisKorbakov\EmojiPhp\Searches\Keys\EmojiLabelKeySearch;
+use DenisKorbakov\EmojiPhp\Searches\Keys\EmojiTagsKeySearch;
 
 final class EmojiSearch implements Search
 {
@@ -22,10 +24,12 @@ final class EmojiSearch implements Search
     }
 
     /**
+     * @return array<string, string>
      * @throws FileNotFoundException
      */
     public function search(): array
     {
+        /** @var array<int, array<string, string|array<int, string>>> $emojis */
         $emojis = new FileJson(
             new File(
                 new EmojiFilePath($this->locale)->emojiLocale()
@@ -41,13 +45,13 @@ final class EmojiSearch implements Search
         $searchedEmojis = [];
 
         foreach ($emojis as $emoji) {
-            $emojiByLabel = new EmojiLabelSearch($emoji, $searchText)->search();
+            $emojiByLabel = new EmojiLabelKeySearch($emoji, $searchText)->search();
             if (! empty($emojiByLabel)) {
                 $searchedEmojis[] = $emojiByLabel;
                 continue;
             }
 
-            $emojiByTags = new EmojiTagsSearch($emoji, $searchText)->search();
+            $emojiByTags = new EmojiTagsKeySearch($emoji, $searchText)->search();
             if (! empty($emojiByTags)) {
                 $searchedEmojis[] = $emojiByTags;
             }

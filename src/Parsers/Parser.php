@@ -6,5 +6,6 @@ namespace DenisKorbakov\EmojiPhp\Parsers;
 
 interface Parser
 {
+    /** @return list<string> */
     public function parse(): array;
 }

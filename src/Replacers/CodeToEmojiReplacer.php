@@ -21,6 +21,7 @@ final readonly class CodeToEmojiReplacer implements Replacer
      */
     public function replace(): string
     {
+        /** @var array<string, string> $emojis */
         $emojis = new File(
             new EmojiFilePath(Locale::EN)->list()
         )->execute();
