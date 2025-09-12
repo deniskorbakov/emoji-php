@@ -1,5 +1,11 @@
 # Emoji PHP
 
+<a href="https://github.com/deniskorbakov/emoji-php"><img alt="GitHub Workflow Status" src="https://github.com/deniskorbakov/emoji-php/actions/workflows/lint.yml/badge.svg"></a>
+<a href="https://github.com/deniskorbakov/emoji-php"><img alt="GitHub Workflow Status" src="https://github.com/deniskorbakov/emoji-php/actions/workflows/tests.yml/badge.svg"></a>
+<a href="https://packagist.org/packages/deniskorbakov/emoji-php"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/deniskorbakov/emoji-php"></a>
+<a href="https://packagist.org/packages/deniskorbakov/emoji-php"><img alt="Latest Version" src="https://img.shields.io/packagist/v/deniskorbakov/emoji-php"></a>
+<a href="https://packagist.org/packages/deniskorbakov/emoji-php"><img alt="License" src="https://img.shields.io/packagist/l/deniskorbakov/emoji-php"></a>
+
 ✨ Supports CLDR emoticon storage standard
 
 🌏 Multilingual search from 25 languages
