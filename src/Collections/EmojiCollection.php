@@ -12,6 +12,8 @@ use DenisKorbakov\EmojiPhp\Locale;
 
 final class EmojiCollection implements Collection
 {
+    public const string SEPARATOR = ':';
+
     public function __construct(
         public Locale $locale,
     ) {
@@ -34,14 +36,14 @@ final class EmojiCollection implements Collection
 
         foreach ($emojis as $emoji) {
             if (
-                ! array_key_exists('group', $emoji) &&
-                ! array_key_exists('unicode', $emoji) &&
-                ! array_key_exists('code', $emoji)
+                !array_key_exists('group', $emoji) &&
+                !array_key_exists('unicode', $emoji) &&
+                !array_key_exists('code', $emoji)
             ) {
                 continue;
             }
 
-            $emojisList[$emoji['group']][$emoji['unicode']] = $emoji['code'];
+            $emojisList[$emoji['group']][$emoji['unicode']] = self::SEPARATOR . $emoji['code'] . self::SEPARATOR;
         }
 
         return $emojisList;
