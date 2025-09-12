@@ -10,7 +10,7 @@ use DenisKorbakov\EmojiPhp\Files\EmojiFilePath;
 use DenisKorbakov\EmojiPhp\Files\File;
 use DenisKorbakov\EmojiPhp\Files\FileJson;
 use DenisKorbakov\EmojiPhp\Locale;
-use DenisKorbakov\EmojiPhp\Mappers\EmojiLocaleMapper;
+use DenisKorbakov\EmojiPhp\Mappers\EmojiLocaleMap;
 use DenisKorbakov\EmojiPhp\Parsers\EmojiListParser;
 use DenisKorbakov\EmojiPhp\Transformers\EmojiListTransformer;
 use Throwable;
@@ -55,7 +55,7 @@ final readonly class EmojiGenerateCommand implements Command
                 new EmojiFilePath($locale)->groups()
             );
 
-            $emojisCldrCombined = new EmojiLocaleMapper(
+            $emojisCldrCombined = new EmojiLocaleMap(
                 new FileJson($emojiBaseLocaleFile),
                 new FileJson($emojiBaseCldrFile),
                 new FileJson($groupsFile)
