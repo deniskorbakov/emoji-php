@@ -47,7 +47,7 @@ final readonly class EmojiGenerateCommand implements Command
                 new EmojiFilePath($locale)->cldr()
             );
 
-            $emojiListFile = new File(
+            $emojiSavedLocale = new File(
                 new EmojiFilePath($locale)->emojiLocale()
             );
 
@@ -61,7 +61,7 @@ final readonly class EmojiGenerateCommand implements Command
                 new FileJson($groupsFile)
             )->combine();
 
-            $emojiLocaleFile = new FileJson($emojiListFile);
+            $emojiLocaleFile = new FileJson($emojiSavedLocale);
             $emojiLocaleFile->write($emojisCldrCombined);
 
             $emojiListFile = new File(
