@@ -7,7 +7,7 @@ namespace DenisKorbakov\EmojiPhp\Mappers;
 use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
 use DenisKorbakov\EmojiPhp\Files\FileJson;
 
-final readonly class EmojiLocaleMapper implements Mapper
+final readonly class EmojiLocaleMap implements Map
 {
     public function __construct(
         public FileJson $localeFile,
@@ -17,15 +17,20 @@ final readonly class EmojiLocaleMapper implements Mapper
     }
 
     /**
+     * @return array<int, array<string, mixed>>
      * @throws FileNotFoundException
      */
     public function combine(): array
     {
+        /** @var array<int, array<string, mixed>> $emojis */
         $emojis = $this->localeFile->read();
+        /** @var array<int, array<string, mixed>> $cldrCodes */
         $cldrCodes = $this->cldrFile->read();
+        /** @var array<string, array<int, array<string, mixed>>> $groups */
         $groups = $this->groupsFile->read();
 
         foreach ($emojis as $key => &$emoji) {
+            /** @var string $hexCodeKey */
             $hexCodeKey = $emoji['hexcode'];
 
             $emoji['code'] = $cldrCodes[$hexCodeKey] ?? null;
@@ -37,9 +42,10 @@ final readonly class EmojiLocaleMapper implements Mapper
                 continue;
             }
 
+            /** @var string $groupNumber */
             $groupNumber = $emoji['group'];
 
-            $emoji['group'] = $groups['groups'][$groupNumber]['message'] ?? null;
+            $emoji['group'] = $groups['groups'][$groupNumber]['message'];
 
             if (array_key_exists('order', $emoji)) {
                 unset($emoji['order']);

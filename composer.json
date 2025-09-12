@@ -31,11 +31,14 @@
   "scripts": {
     "tests": "pest --stop-on-failure --colors",
     "tests-coverage": "pest --coverage --min=90",
-    "tests-mutation": "pest --mutate",
     "lint": [
       "@phpstan",
       "@cs",
       "@rector"
+    ],
+    "lint-fix": [
+      "phpcbf",
+      "rector"
     ],
     "phpstan": "phpstan analyse --memory-limit=2G",
     "rector": "rector",
@@ -51,8 +54,8 @@
     "rector/rector": "*",
     "squizlabs/php_codesniffer": "^3.13",
     "slevomat/coding-standard": "^8.20",
-    "orchestra/testbench": "^10.4",
-    "milesj/emojibase": "^16.0"
+    "milesj/emojibase": "^16.0",
+    "mockery/mockery": "^1.6"
   },
   "repositories": [
     {

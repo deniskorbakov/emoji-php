@@ -6,26 +6,32 @@ namespace DenisKorbakov\EmojiPhp\Parsers;
 
 final readonly class EmojiListParser implements Parser
 {
-	public const string SEPARATOR = ':';
+    public const string SEPARATOR = ':';
 
-	/** @param array<int, array<string, mixed>> $emojisLocale */
-	public function __construct(
-		public array $emojisLocale,
-	) {
-	}
+    /** @param array<int, array<string, mixed>> $emojisLocale */
+    public function __construct(
+        public array $emojisLocale,
+    ) {
+    }
 
-	/** @return array<string, string> */
-	public function parse(): array
-	{
-		$emojisList = [];
+    /** @return list<string> */
+    public function parse(): array
+    {
+        $emojisList = [];
 
-		foreach ($this->emojisLocale as $emoji) {
-			$emojiUnicode = $emoji['unicode'];
-			$cldrCode = self::SEPARATOR . $emoji['code'] . self::SEPARATOR;
+        foreach ($this->emojisLocale as $emoji) {
+            /** @var string $emojiUnicode */
+            $emojiUnicode = $emoji['unicode'];
 
-			$emojisList[] = sprintf("'%s'=>'%s'", $emojiUnicode, $cldrCode);
-		}
+            if (! is_string($emoji['code'])) {
+                continue;
+            }
 
-		return $emojisList;
-	}
+            $cldrCode = self::SEPARATOR . $emoji['code'] . self::SEPARATOR;
+
+            $emojisList[] = sprintf("'%s'=>'%s'", $emojiUnicode, $cldrCode);
+        }
+
+        return $emojisList;
+    }
 }

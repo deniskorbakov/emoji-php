@@ -6,78 +6,78 @@ namespace DenisKorbakov\EmojiPhp;
 
 enum Locale: string
 {
-	/** Bangladesh (Bengali) */
-	case BN = 'bn';
+    /** Bangladesh (Bengali) */
+    case BN = 'bn';
 
-	/** Denmark (Danish) */
-	case DA = 'da';
+    /** Denmark (Danish) */
+    case DA = 'da';
 
-	/** Germany (German) */
-	case DE = 'de';
+    /** Germany (German) */
+    case DE = 'de';
 
-	/** United States (English) */
-	case EN = 'en';
+    /** United States (English) */
+    case EN = 'en';
 
-	/** Spain (Spanish) */
-	case ES = 'es';
+    /** Spain (Spanish) */
+    case ES = 'es';
 
-	/** Estonia (Estonian) */
-	case ET = 'et';
+    /** Estonia (Estonian) */
+    case ET = 'et';
 
-	/** Finland (Finnish) */
-	case FI = 'fi';
+    /** Finland (Finnish) */
+    case FI = 'fi';
 
-	/** France (French) */
-	case FR = 'fr';
+    /** France (French) */
+    case FR = 'fr';
 
-	/** India (Hindi) */
-	case HI = 'hi';
+    /** India (Hindi) */
+    case HI = 'hi';
 
-	/** Hungary (Hungarian) */
-	case HU = 'hu';
+    /** Hungary (Hungarian) */
+    case HU = 'hu';
 
-	/** Italy (Italian) */
-	case IT = 'it';
+    /** Italy (Italian) */
+    case IT = 'it';
 
-	/** Japan (Japanese) */
-	case JA = 'ja';
+    /** Japan (Japanese) */
+    case JA = 'ja';
 
-	/** South Korea (Korean) */
-	case KO = 'ko';
+    /** South Korea (Korean) */
+    case KO = 'ko';
 
-	/** Lithuania (Lithuanian) */
-	case LT = 'lt';
+    /** Lithuania (Lithuanian) */
+    case LT = 'lt';
 
-	/** Malaysia (Malay) */
-	case MS = 'ms';
+    /** Malaysia (Malay) */
+    case MS = 'ms';
 
-	/** Norway (Norwegian Bokmål) */
-	case NB = 'nb';
+    /** Norway (Norwegian Bokmål) */
+    case NB = 'nb';
 
-	/** Netherlands (Dutch) */
-	case NL = 'nl';
+    /** Netherlands (Dutch) */
+    case NL = 'nl';
 
-	/** Poland (Polish) */
-	case PL = 'pl';
+    /** Poland (Polish) */
+    case PL = 'pl';
 
-	/** Portugal (Portuguese) */
-	case PT = 'pt';
+    /** Portugal (Portuguese) */
+    case PT = 'pt';
 
-	/** Russia (Russian) */
-	case RU = 'ru';
+    /** Russia (Russian) */
+    case RU = 'ru';
 
-	/** Sweden (Swedish) */
-	case SV = 'sv';
+    /** Sweden (Swedish) */
+    case SV = 'sv';
 
-	/** Thailand (Thai) */
-	case TH = 'th';
+    /** Thailand (Thai) */
+    case TH = 'th';
 
-	/** Ukraine (Ukrainian) */
-	case UK = 'uk';
+    /** Ukraine (Ukrainian) */
+    case UK = 'uk';
 
-	/** Vietnam (Vietnamese) */
-	case VI = 'vi';
+    /** Vietnam (Vietnamese) */
+    case VI = 'vi';
 
-	/** China (Chinese) */
-	case ZH = 'zh';
+    /** China (Chinese) */
+    case ZH = 'zh';
 }

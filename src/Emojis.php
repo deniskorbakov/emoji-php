@@ -4,21 +4,14 @@ declare(strict_types=1);
 
 namespace DenisKorbakov\EmojiPhp;
 
-use DenisKorbakov\EmojiPhp\Files\EmojiFilePath;
+use DenisKorbakov\EmojiPhp\Collections\EmojiCollection;
 use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
-use DenisKorbakov\EmojiPhp\Files\File;
-use DenisKorbakov\EmojiPhp\Lists\EmojiList;
 use DenisKorbakov\EmojiPhp\Replacers\CodeToEmojiReplacer;
 use DenisKorbakov\EmojiPhp\Replacers\EmojiToCodeReplacer;
 use DenisKorbakov\EmojiPhp\Searches\EmojiSearch;
 
 final class Emojis
 {
-    public function __construct(
-        public Locale $locale,
-    ) {
-    }
-
     /**
      * Replace code on emoji unicode from text
      *
@@ -26,11 +19,7 @@ final class Emojis
      */
     public function toEmoji(string $text): string
     {
-        return new CodeToEmojiReplacer(
-            new File(
-                new EmojiFilePath($this->locale)->list()
-            ), $text
-        )->replace();
+        return new CodeToEmojiReplacer($text)->replace();
     }
 
     /**
@@ -40,26 +29,18 @@ final class Emojis
      */
     public function toCode(string $text): string
     {
-        return new EmojiToCodeReplacer(
-            new File(
-                new EmojiFilePath($this->locale)->list()
-            ), $text
-        )->replace();
+        return new EmojiToCodeReplacer($text)->replace();
     }
 
     /**
      * Get list emojis unicode with code group by category
      *
-     * @return array<string, string>
+     * @return array<string, array<string, string>>
      * @throws FileNotFoundException
      */
-    public function list(): array
+    public function list(Locale $locale): array
     {
-        return new EmojiList(
-            new File(
-                new EmojiFilePath($this->locale)->emojiLocale()
-            )
-        )->list();
+        return new EmojiCollection($locale)->collect();
     }
 
     /**
@@ -67,16 +48,12 @@ final class Emojis
      *
      * Search works only from 2 characters
      *
-     * @param string $text
-     * @return array
+     * @param Locale $locale
+     * @return array<string, string>
      * @throws FileNotFoundException
      */
-    public function search(string $text): array
+    public function search(Locale $locale, string $text): array
     {
-        return new EmojiSearch(
-            new File(
-                new EmojiFilePath($this->locale)->emojiLocale()
-            ), $text
-        )->search();
+        return new EmojiSearch($locale, $text)->search();
     }
 }

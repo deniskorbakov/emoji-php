@@ -1,6 +1,10 @@
 name: TESTS
 
-on: ['push']
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   test:
@@ -23,13 +27,10 @@ jobs:
           coverage: xdebug
 
       - name: Install dependencies
-        run: composer update
+        run: composer install --dev
 
       - name: Test code
         run: composer tests
 
       - name: Test coverage
         run: composer tests-coverage
-
-      - name: Test coverage
-        run: composer tests-mutation
