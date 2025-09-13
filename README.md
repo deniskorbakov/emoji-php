@@ -48,7 +48,7 @@ use DenisKorbakov\EmojiPhp\Emojis;
 
 $text = 'Hello, world! 🌍️'
 
-new Emojis()->toCode();
+new Emojis()->toCode($text);
 // return 'Hello, world! :globe_showing_europe_africa:'
 ```
 
