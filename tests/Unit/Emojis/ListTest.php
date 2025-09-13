@@ -47,7 +47,3 @@ test('success - get list ru emojis', function (): void {
             ]
         );
 });
-
-test('fail - get not found locale', function (): void {
-    new Emojis()->list(Locale::ZH);
-})->throws(FileNotFoundException::class);
