@@ -66,9 +66,15 @@
       "package": {
         "name": "milesj/emojibase",
         "version": "16.0.3",
+        "type": "library",
         "dist": {
           "url": "https://github.com/milesj/emojibase/archive/refs/tags/emojibase-data@16.0.3.zip",
           "type": "zip"
+        },
+        "source": {
+          "url": "https://github.com/milesj/emojibase.git",
+          "type": "git",
+          "reference": "emojibase-data@16.0.3"
         }
       }
     }
