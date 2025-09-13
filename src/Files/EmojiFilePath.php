@@ -14,10 +14,10 @@ final readonly class EmojiFilePath
     public const string EMOJI_GROUPS_FILENAME = '/messages.raw.json';
     public const string CLDR_CODE_FILENAME = 'en/shortcodes/cldr.raw.json';
 
-    public const string EMOJI_LOCALE_DIR = 'emojis/locale/';
+    public const string EMOJI_LOCALE_DIR = '/../../emojis/locale/';
     public const string EMOJI_LOCALE_EXTENSION = '.json';
 
-    public const string EMOJI_LIST_FILENAME = 'emojis/list.php';
+    public const string EMOJI_LIST_FILENAME = '/../../emojis/list.php';
 
 
     public function __construct(
@@ -37,12 +37,12 @@ final readonly class EmojiFilePath
 
     public function emojiLocale(): string
     {
-        return self::EMOJI_LOCALE_DIR . $this->locale->value . self::EMOJI_LOCALE_EXTENSION;
+        return __DIR__ .  self::EMOJI_LOCALE_DIR . $this->locale->value . self::EMOJI_LOCALE_EXTENSION;
     }
 
     public function list(): string
     {
-        return self::EMOJI_LIST_FILENAME;
+        return __DIR__ . self::EMOJI_LIST_FILENAME;
     }
 
     public function groups(): string
