@@ -44,10 +44,13 @@
     "rector": "rector",
     "cs": "phpcs",
     "generate-standrt-emojis": [
-      "@php bin/generate-emojis.php ru",
-      "@php bin/generate-emojis.php en"
+      "@php bin/generate-emojis ru",
+      "@php bin/generate-emojis en"
     ]
   },
+  "bin": [
+    "bin/generate-emojis"
+  ],
   "require-dev": {
     "pestphp/pest": "^3.8",
     "phpstan/phpstan": "^2.1",
