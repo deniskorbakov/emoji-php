@@ -3,7 +3,19 @@
 
 declare(strict_types=1);
 
-require_once dirname(__DIR__) . '/vendor/autoload.php';
+foreach (
+	[
+		dirname(__DIR__, 4) . '/vendor/autoload.php',
+		dirname(__DIR__) . '/vendor/autoload.php',
+	] as $autoloadPath
+) {
+	if (file_exists($autoloadPath)) {
+		include_once $autoloadPath;
+
+		break;
+	}
+}
+
 
 use DenisKorbakov\EmojiPhp\Commands\Arguments\ConsoleArguments;
 use DenisKorbakov\EmojiPhp\Commands\EmojiGenerateCommand;
