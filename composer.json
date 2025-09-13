@@ -15,8 +15,7 @@
     }
   ],
   "require": {
-    "php": ">=8.4",
-    "milesj/emojibase": "^16.0"
+    "php": ">=8.4"
   },
   "autoload": {
     "psr-4": {
@@ -46,13 +45,34 @@
     "cs": "phpcs",
     "generate-standard-emojis": [
       "@php bin/generate-emojis ru",
-      "@php bin/generate-emojis en"
+      "@php bin/generate-emojis en",
+      "@php bin/generate-emojis bn",
+      "@php bin/generate-emojis da",
+      "@php bin/generate-emojis de",
+      "@php bin/generate-emojis es",
+      "@php bin/generate-emojis fi",
+      "@php bin/generate-emojis fr",
+      "@php bin/generate-emojis hi",
+      "@php bin/generate-emojis hu",
+      "@php bin/generate-emojis it",
+      "@php bin/generate-emojis ja",
+      "@php bin/generate-emojis ko",
+      "@php bin/generate-emojis lt",
+      "@php bin/generate-emojis ms",
+      "@php bin/generate-emojis nb",
+      "@php bin/generate-emojis nl",
+      "@php bin/generate-emojis pl",
+      "@php bin/generate-emojis pt",
+      "@php bin/generate-emojis ru",
+      "@php bin/generate-emojis sv",
+      "@php bin/generate-emojis th",
+      "@php bin/generate-emojis uk",
+      "@php bin/generate-emojis vi",
+      "@php bin/generate-emojis zh"
     ]
   },
-  "bin": [
-    "bin/generate-emojis"
-  ],
   "require-dev": {
+    "milesj/emojibase": "^16.0",
     "pestphp/pest": "^3.8",
     "phpstan/phpstan": "^2.1",
     "rector/rector": "*",
@@ -66,15 +86,9 @@
       "package": {
         "name": "milesj/emojibase",
         "version": "16.0.3",
-        "type": "library",
         "dist": {
           "url": "https://github.com/milesj/emojibase/archive/refs/tags/emojibase-data@16.0.3.zip",
           "type": "zip"
-        },
-        "source": {
-          "url": "https://github.com/milesj/emojibase.git",
-          "type": "git",
-          "reference": "emojibase-data@16.0.3"
         }
       }
     }
