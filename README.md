@@ -10,8 +10,6 @@
 
 🌏 Multilingual search from 25 languages
 
-🔧 Generating a specific language base of smacks
-
 🪄 Replacing unicode emoticons in CLDR format and vice versa
 
 @ This library uses a database of emoticons from - [link](https://github.com/milesj/emojibase)
@@ -21,13 +19,6 @@
 Install the package via composer:
 ```shell
 composer require deniskorbakov/emoji-php
-```
-
-If you need to use a different locale instead of (RU/EN), 
-then generate a file with emoticons for your locale with the following command:
-
-```shell
-php bin/generate-emojis.php your_locale
 ```
 
 Now you can use the class with emoticons:

@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use DenisKorbakov\EmojiPhp\Emojis;
-use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
 use DenisKorbakov\EmojiPhp\Locale;
 
 test('success - get list en emojis', function (): void {
@@ -47,7 +46,3 @@ test('success - get list ru emojis', function (): void {
             ]
         );
 });
-
-test('fail - get not found locale', function (): void {
-    new Emojis()->list(Locale::ZH);
-})->throws(FileNotFoundException::class);
