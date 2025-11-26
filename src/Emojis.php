@@ -8,14 +8,16 @@ use DenisKorbakov\EmojiPhp\Collections\EmojiCollection;
 use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
 use DenisKorbakov\EmojiPhp\Replacers\CodeToEmoji;
 use DenisKorbakov\EmojiPhp\Replacers\EmojiToCode;
-use DenisKorbakov\EmojiPhp\Replacers\TextToEmoji;
 use DenisKorbakov\EmojiPhp\Replacers\TextToCode;
+use DenisKorbakov\EmojiPhp\Replacers\TextToEmoji;
 use DenisKorbakov\EmojiPhp\Searches\EmojiSearch;
 
 final class Emojis
 {
     /**
      * Replace code on emoji unicode from text
+     *
+     * @param non-empty-string $text
      *
      * @throws FileNotFoundException
      */
@@ -26,6 +28,8 @@ final class Emojis
 
     /**
      * Replace emoji unicode on code from text
+     *
+     * @param non-empty-string $text
      *
      * @throws FileNotFoundException
      */
@@ -50,6 +54,8 @@ final class Emojis
      *
      * Search works only from 2 characters
      *
+     * @param non-empty-string $text
+     *
      * @return array<string, string>
      * @throws FileNotFoundException
      */
@@ -61,6 +67,8 @@ final class Emojis
     /**
      * Replace emoji unicode on code from emoji
      *
+     * @param non-empty-string $emoji
+     *
      * @throws FileNotFoundException
      */
     public function codeByEmoji(string $emoji): string
@@ -70,6 +78,8 @@ final class Emojis
 
     /**
      * Replace code on emoji unicode from code
+     *
+     * @param non-empty-string $code
      *
      * @throws FileNotFoundException
      */
