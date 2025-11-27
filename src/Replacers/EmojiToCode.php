@@ -16,16 +16,17 @@ final class EmojiToCode implements Replacer
     ) {
     }
 
-    /**
-     * @throws FileNotFoundException
-     */
     public function replace(): string
     {
-        /** @var array<string, string> $emojis */
-        $emojis = new File(
-            new EmojiFilePath(Locale::EN)->list()
-        )->execute();
+        try {
+            /** @var array<string, string> $emojis */
+            $emojis = new File(
+                new EmojiFilePath(Locale::EN)->list()
+            )->execute();
 
-        return $emojis[trim($this->emoji)] ?? '';
+            return $emojis[trim($this->emoji)] ?? '';
+        } catch (FileNotFoundException) {
+            return '';
+        }
     }
 }
