@@ -41,7 +41,7 @@ use DenisKorbakov\EmojiPhp\Locale;
 new Emojis()->list(Locale::EN);
 // return ['smileys & emotion' => ['😀' => ':grinning_face:', ...]]
 ```
-This method converts the unicode code of the emoji face to the cldr code - we get unicode emoji face from the ``list`` method
+This method converts the unicode of the emoji to the cldr code - we get unicode emoji from the ``list`` method
 
 ```php
 use DenisKorbakov\EmojiPhp\Emojis;
@@ -52,7 +52,18 @@ new Emojis()->toCode($text);
 // return 'Hello, world! :globe_showing_europe_africa:'
 ```
 
-This method converts a smiley face from cldr code to unicode - we get cldr from the ``list`` method
+This method converts the one unicode emoji to the cldr code - we get unicode emoji from the ``list`` method
+
+```php
+use DenisKorbakov\EmojiPhp\Emojis;
+
+$emoji = '🌍'
+
+new Emojis()->codeByEmoji($text);
+// return ':globe_showing_europe_africa:'
+```
+
+This method converts from cldr code with text to unicode emojis - we get cldr from the ``list`` method
 
 ```php
 use DenisKorbakov\EmojiPhp\Emojis;
@@ -61,6 +72,17 @@ $text = 'Hello :waving_hand:';
 
 new Emojis()->toEmoji($text);
 // return 'Hello 👋'
+```
+
+This method converts one cldr code to unicode emoji - we get cldr from the ``list`` method
+
+```php
+use DenisKorbakov\EmojiPhp\Emojis;
+
+$text = ':waving_hand:';
+
+new Emojis()->emojiByCode($text);
+// return '👋'
 ```
 
 This method searches for emoticons by the word, and you also explicitly specify which language to search in
