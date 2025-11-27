@@ -51,5 +51,3 @@ test('fail - text with emoji', function (): void {
 
     expect(new EmojiToCode($emoji)->replace())->toBe('');
 });
-
-
