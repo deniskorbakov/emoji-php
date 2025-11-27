@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use DenisKorbakov\EmojiPhp\Files\Exceptions\JsonEncodeException;
 use DenisKorbakov\EmojiPhp\Files\File;
 use DenisKorbakov\EmojiPhp\Files\FileJson;
 
@@ -35,3 +36,17 @@ test('success - write method creates file if not exists', function (): void {
 
     unlink($tempFile);
 });
+
+test('fail - write broke data', function (): void {
+    $tempFile = sys_get_temp_dir() . '/test_broke.json';
+    if (file_exists($tempFile)) {
+        unlink($tempFile);
+    }
+
+    $file = new File($tempFile);
+    $fileJson = new FileJson($file);
+
+    $fileJson->write(['invalid' => NAN]);
+
+    unlink($tempFile);
+})->throws(JsonEncodeException::class);
