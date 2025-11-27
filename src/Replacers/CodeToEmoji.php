@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace DenisKorbakov\EmojiPhp\Replacers;
 
-use DenisKorbakov\EmojiPhp\Files\EmojiFilePath;
 use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
+use DenisKorbakov\EmojiPhp\Files\EmojiFilePath;
 use DenisKorbakov\EmojiPhp\Files\File;
 use DenisKorbakov\EmojiPhp\Locale;
 
-final readonly class EmojiToCodeReplacer implements Replacer
+final class CodeToEmoji implements Replacer
 {
     public function __construct(
-        public string $text,
+        public string $code,
     ) {
     }
 
@@ -26,10 +26,6 @@ final readonly class EmojiToCodeReplacer implements Replacer
             new EmojiFilePath(Locale::EN)->list()
         )->execute();
 
-        return str_replace(
-            array_keys($emojis),
-            array_values($emojis),
-            $this->text
-        );
+        return array_keys($emojis, trim($this->code), true)[0] ?? '';
     }
 }

@@ -9,7 +9,7 @@ use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
 use DenisKorbakov\EmojiPhp\Files\File;
 use DenisKorbakov\EmojiPhp\Locale;
 
-final readonly class CodeToEmojiReplacer implements Replacer
+final readonly class TextToEmoji implements Replacer
 {
     public function __construct(
         public string $text,

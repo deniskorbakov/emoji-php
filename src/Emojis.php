@@ -6,8 +6,10 @@ namespace DenisKorbakov\EmojiPhp;
 
 use DenisKorbakov\EmojiPhp\Collections\EmojiCollection;
 use DenisKorbakov\EmojiPhp\Files\Exceptions\FileNotFoundException;
-use DenisKorbakov\EmojiPhp\Replacers\CodeToEmojiReplacer;
-use DenisKorbakov\EmojiPhp\Replacers\EmojiToCodeReplacer;
+use DenisKorbakov\EmojiPhp\Replacers\CodeToEmoji;
+use DenisKorbakov\EmojiPhp\Replacers\EmojiToCode;
+use DenisKorbakov\EmojiPhp\Replacers\TextToCode;
+use DenisKorbakov\EmojiPhp\Replacers\TextToEmoji;
 use DenisKorbakov\EmojiPhp\Searches\EmojiSearch;
 
 final class Emojis
@@ -15,21 +17,25 @@ final class Emojis
     /**
      * Replace code on emoji unicode from text
      *
+     * @param non-empty-string $text
+     *
      * @throws FileNotFoundException
      */
     public function toEmoji(string $text): string
     {
-        return new CodeToEmojiReplacer($text)->replace();
+        return new TextToEmoji($text)->replace();
     }
 
     /**
      * Replace emoji unicode on code from text
      *
+     * @param non-empty-string $text
+     *
      * @throws FileNotFoundException
      */
     public function toCode(string $text): string
     {
-        return new EmojiToCodeReplacer($text)->replace();
+        return new TextToCode($text)->replace();
     }
 
     /**
@@ -48,11 +54,37 @@ final class Emojis
      *
      * Search works only from 2 characters
      *
+     * @param non-empty-string $text
+     *
      * @return array<string, string>
      * @throws FileNotFoundException
      */
     public function search(Locale $locale, string $text): array
     {
         return new EmojiSearch($locale, $text)->search();
+    }
+
+    /**
+     * Replace emoji unicode on code from emoji
+     *
+     * @param non-empty-string $emoji
+     *
+     * @throws FileNotFoundException
+     */
+    public function codeByEmoji(string $emoji): string
+    {
+        return new EmojiToCode($emoji)->replace();
+    }
+
+    /**
+     * Replace code on emoji unicode from code
+     *
+     * @param non-empty-string $code
+     *
+     * @throws FileNotFoundException
+     */
+    public function emojiByCode(string $code): string
+    {
+        return new CodeToEmoji($code)->replace();
     }
 }
