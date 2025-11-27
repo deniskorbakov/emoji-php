@@ -17,8 +17,6 @@ final class Emojis
     /**
      * Replace code on emoji unicode from text
      *
-     * @param non-empty-string $text
-     *
      * @throws FileNotFoundException
      */
     public function toEmoji(string $text): string
@@ -28,8 +26,6 @@ final class Emojis
 
     /**
      * Replace emoji unicode on code from text
-     *
-     * @param non-empty-string $text
      *
      * @throws FileNotFoundException
      */
@@ -54,8 +50,6 @@ final class Emojis
      *
      * Search works only from 2 characters
      *
-     * @param non-empty-string $text
-     *
      * @return array<string, string>
      * @throws FileNotFoundException
      */
@@ -64,25 +58,13 @@ final class Emojis
         return new EmojiSearch($locale, $text)->search();
     }
 
-    /**
-     * Replace emoji unicode on code from emoji
-     *
-     * @param non-empty-string $emoji
-     *
-     * @throws FileNotFoundException
-     */
+    /** Replace emoji unicode on code from emoji */
     public function codeByEmoji(string $emoji): string
     {
         return new EmojiToCode($emoji)->replace();
     }
 
-    /**
-     * Replace code on emoji unicode from code
-     *
-     * @param non-empty-string $code
-     *
-     * @throws FileNotFoundException
-     */
+    /** Replace code on emoji unicode from code */
     public function emojiByCode(string $code): string
     {
         return new CodeToEmoji($code)->replace();
