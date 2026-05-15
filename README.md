@@ -44,7 +44,7 @@ new Emojis()->list(Locale::EN);
 
 ---
 
-This method converts the unicode of the emoji to the cldr code - we get unicode emoji from the ``list`` method
+This method converts the unicode of the emoji to the cldr code
 
 ```php
 use DenisKorbakov\EmojiPhp\Emojis;
@@ -57,7 +57,7 @@ new Emojis()->toCode($text);
 
 ---
 
-This method converts the one unicode emoji to the cldr code - we get unicode emoji from the ``list`` method
+This method converts the one unicode emoji to the cldr code
 
 ```php
 use DenisKorbakov\EmojiPhp\Emojis;
@@ -70,7 +70,7 @@ new Emojis()->codeByEmoji($text);
 
 ---
 
-This method converts from cldr code with text to unicode emojis - we get cldr from the ``list`` method
+This method converts from cldr code with text to unicode emojis
 
 ```php
 use DenisKorbakov\EmojiPhp\Emojis;
@@ -83,7 +83,7 @@ new Emojis()->toEmoji($text);
 
 ---
 
-This method converts one cldr code to unicode emoji - we get cldr from the ``list`` method
+This method converts one cldr code to unicode emoji
 
 ```php
 use DenisKorbakov\EmojiPhp\Emojis;
