@@ -54,7 +54,6 @@ return static function (RectorConfig $rectorConfig): void {
             NewlineBeforeNewAssignSetRector::class,
             EncapsedStringsToSprintfRector::class,
             PostIncDecToPreIncDecRector::class,
-            SymplifyQuoteEscapeRector::class,
             RemoveUnusedPromotedPropertyRector::class,
             RemoveUnusedPrivateMethodRector::class,
             RemoveUnusedPrivatePropertyRector::class,
