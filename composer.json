@@ -75,7 +75,7 @@
     "milesj/emojibase": "^16.0",
     "pestphp/pest": "^3.8 || ^4.0",
     "phpstan/phpstan": "^2.1",
-    "rector/rector": "*",
+    "rector/rector": "^2.0",
     "squizlabs/php_codesniffer": "^3.13 || ^4.0",
     "slevomat/coding-standard": "^8.20",
     "mockery/mockery": "^1.6"
