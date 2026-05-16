@@ -41,7 +41,7 @@
       "rector"
     ],
     "phpstan": "phpstan analyse --memory-limit=2G",
-    "rector": "@php vendor/bin/rector --dry-run --ansi",
+    "rector": "@php vendor/bin/rector --dry-run --ansi --debug",
     "cs": "phpcs",
     "generate-standard-emojis": [
       "@php bin/generate-emojis ru",

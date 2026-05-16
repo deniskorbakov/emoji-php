@@ -31,47 +31,61 @@ use Rector\TypeDeclaration\Rector\StmtsAwareInterface\DeclareStrictTypesRector;
 use Rector\ValueObject\PhpVersion;
 
 return static function (RectorConfig $rectorConfig): void {
-    $rectorConfig->paths([
-         __DIR__ . '/src',
-         __DIR__ . '/tests',
-    ]);
+    $rectorConfig->paths(
+        [
+            __DIR__ . '/src',
+            __DIR__ . '/tests',
+        ]
+    );
 
-    $rectorConfig->rules([
-        AddVoidReturnTypeWhereNoReturnRector::class,
-        DeclareStrictTypesRector::class,
-        ClosureReturnTypeRector::class,
-        ReturnTypeFromStrictTypedCallRector::class,
-        ReturnTypeFromStrictNewArrayRector::class,
-        ReturnTypeFromReturnDirectArrayRector::class,
-        TypedPropertyFromStrictConstructorRector::class,
-        CompleteDynamicPropertiesRector::class,
-        InlineArrayReturnAssignRector::class,
-        ExplicitBoolCompareRector::class,
-        SwitchNegatedTernaryRector::class,
-        NewlineBeforeNewAssignSetRector::class,
-        EncapsedStringsToSprintfRector::class,
-        PostIncDecToPreIncDecRector::class,
-        SymplifyQuoteEscapeRector::class,
-        RemoveUnusedPromotedPropertyRector::class,
-        RemoveUnusedPrivateMethodRector::class,
-        RemoveUnusedPrivatePropertyRector::class,
-        ClassPropertyAssignToConstructorPromotionRector::class,
-        ReadOnlyPropertyRector::class,
-        PrivatizeFinalClassMethodRector::class,
-        PrivatizeFinalClassPropertyRector::class,
-    ]);
+    $rectorConfig->rules(
+        [
+            AddVoidReturnTypeWhereNoReturnRector::class,
+            DeclareStrictTypesRector::class,
+            ClosureReturnTypeRector::class,
+            ReturnTypeFromStrictTypedCallRector::class,
+            ReturnTypeFromStrictNewArrayRector::class,
+            ReturnTypeFromReturnDirectArrayRector::class,
+            TypedPropertyFromStrictConstructorRector::class,
+            CompleteDynamicPropertiesRector::class,
+            InlineArrayReturnAssignRector::class,
+            ExplicitBoolCompareRector::class,
+            SwitchNegatedTernaryRector::class,
+            NewlineBeforeNewAssignSetRector::class,
+            EncapsedStringsToSprintfRector::class,
+            PostIncDecToPreIncDecRector::class,
+            SymplifyQuoteEscapeRector::class,
+            RemoveUnusedPromotedPropertyRector::class,
+            RemoveUnusedPrivateMethodRector::class,
+            RemoveUnusedPrivatePropertyRector::class,
+            ClassPropertyAssignToConstructorPromotionRector::class,
+            ReadOnlyPropertyRector::class,
+            PrivatizeFinalClassMethodRector::class,
+            PrivatizeFinalClassPropertyRector::class,
+        ]
+    );
 
-    $rectorConfig->skip([
-        CompactToVariablesRector::class,
-        RemoveEmptyClassMethodRector::class,
-    ]);
+    $rectorConfig->skip(
+        [
+            CompactToVariablesRector::class,
+            RemoveEmptyClassMethodRector::class,
+        ]
+    );
 
-    $rectorConfig->sets([
-        SetList::CODE_QUALITY,
-        SetList::TYPE_DECLARATION,
-        SetList::DEAD_CODE,
-        SetList::PRIVATIZATION,
-    ]);
+    $rectorConfig->sets(
+        [
+            SetList::CODE_QUALITY,
+            SetList::TYPE_DECLARATION,
+            SetList::DEAD_CODE,
+            SetList::PRIVATIZATION,
+        ]
+    );
+
+    $rectorConfig->parallel(
+        processTimeout:     240,
+        maxNumberOfProcess: 4,
+        jobSize:            10
+    );
 
     $rectorConfig->phpVersion(PhpVersion::PHP_84);
 };
