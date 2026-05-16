@@ -34,7 +34,7 @@
     "lint": [
       "@phpstan",
       "@cs",
-      "@rector"
+      "@php vendor/bin/rector --dry-run --ansi"
     ],
     "lint-fix": [
       "phpcbf",
