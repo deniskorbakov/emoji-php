@@ -74,6 +74,4 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     $rectorConfig->phpVersion(PhpVersion::PHP_84);
-
-    $rectorConfig->disableParallel();
 };
